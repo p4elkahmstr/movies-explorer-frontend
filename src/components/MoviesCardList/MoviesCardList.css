@@ -12,6 +12,7 @@
         row-gap: 45px;
         grid-template-columns: repeat(auto-fill, minmax(339px, 1fr));
         grid-template-rows: repeat(auto-fill, minmax(190px, 1fr));
+        justify-items: center;
     }
 }
 
@@ -19,5 +20,7 @@
     .movies-card-list {
         margin-top: 40px;
         gap: 38px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        justify-items: center;
     }
 }

@@ -3,9 +3,8 @@ import "./AboutProject.css";
 
 const AboutProject = () => {
   return (
-    <div className="about-project" id="about-project">
+    <section className="about-project" id="about-project">
       <h2 className="about-project__header">О проекте</h2>
-      <div className="about-project__line"></div>
       <div className="about-project__info">
         <h3 className="about-project___info_title about-project__stages">
           Дипломный проект включал 5 этапов
@@ -23,12 +22,12 @@ const AboutProject = () => {
         </p>
       </div>
       <div className="about-project__scale">
-        <div className="about-project__scale_week-one">1 неделя</div>
-        <div className="about-project__scale_week-four">4 недели</div>
+        <p className="about-project__scale_week-one">1 неделя</p>
+        <p className="about-project__scale_week-four">4 недели</p>
         <p className="about-project__scale_subtitle">Back-end</p>
         <p className="about-project__scale_subtitle">Front-end</p>
       </div>
-    </div>
+    </section>
   );
 };
 

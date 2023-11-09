@@ -1,5 +1,5 @@
 .promo {
-    margin: 38px 40px 0;
+    margin: 34px 40px 0;
     background-color: #272727;
     width: 1200px;
     height: 493px;
@@ -21,8 +21,7 @@
 @media (max-width: 1279px) and (min-width: 768px) {
     .promo {
         width: 728px;
-        margin: 0 auto;
-        margin-top: 40px;
+        margin: 35px auto 0;
         height: 834px;
         font-size: 40px;
         line-height: 1.3;
@@ -31,12 +30,13 @@
     .promo__text {
         max-width: 680px;
         margin-top: 350px;
+        letter-spacing: -1.5px;
     }
 }
 
 @media (max-width: 767px) and (min-width: 320px) {
     .promo {
-        margin: 32px auto 0;
+        margin: 28px auto 0;
         width: 292px;
         height: 586px;
         font-size: 29px;

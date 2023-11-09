@@ -79,7 +79,7 @@ const Card = [
 
 const MoviesCardList = () => {
   return (
-    <div className="movies-card-list">
+    <section className="movies-card-list">
       {Card.map((el, index) => (
         <MoviesCard
           image={el.image}
@@ -88,7 +88,7 @@ const MoviesCardList = () => {
           key={index}
         />
       ))}
-    </div>
+    </section>
   );
 };
 

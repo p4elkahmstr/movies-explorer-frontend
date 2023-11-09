@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 
 const Login = () => {
   return (
-    <div className="login">
+    <section className="login">
       <div className="login__header">
         <img src={logo} alt="logo" className="login__logo" />
         <h2 className="login__message">Рады видеть!</h2>
@@ -13,18 +13,34 @@ const Login = () => {
         <label for="email" className="login__form_label">
           E-mail
         </label>
-        <input className="login__form_input"></input>
+        <input
+          id="email"
+          className="login__form_input"
+          required
+          placeholder="Введите E-mail..."
+        />
         <label for="password" className="login__form_label">
           Пароль
         </label>
-        <input className="login__form_input"></input>
-        <button className="login__form_submit">Войти</button>
+        <input
+          id="password"
+          className="login__form_input"
+          required
+          placeholder="Введите пароль..."
+          minLength={2}
+          maxLength={40}
+        />
+        <button className="login__form_submit" type="submit">
+          Войти
+        </button>
         <p className="login__form_subtitle">
           Ещё не зарегистрированы?
-          <span className="login__form_span">Регистрация</span>
+          <a href="/signup" className="login__form_span">
+            Регистрация
+          </a>
         </p>
       </form>
-    </div>
+    </section>
   );
 };
 

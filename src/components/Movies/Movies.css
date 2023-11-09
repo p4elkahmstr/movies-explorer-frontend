@@ -23,10 +23,6 @@
     .movies {
         margin: 0 30px;
     };
-
-    .movies__more-btn {
-        margin: 60px auto 0;
-    }
 }
 
 @media (max-width: 767px) and (min-width: 320px) {

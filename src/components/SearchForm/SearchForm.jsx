@@ -18,13 +18,13 @@ const MovieSwitch = styled(Switch)({
 
 const SearchForm = () => {
   return (
-    <div className="search-form">
+    <form className="search-form">
       <div className="search-form__container">
         <input
           className="search-form__container_input"
           placeholder="Фильм"
         ></input>
-        <button className="search-form__container_button">
+        <button className="search-form__container_button" type="button">
           <img
             src={find}
             alt="arrow"
@@ -37,7 +37,7 @@ const SearchForm = () => {
         Короткометражки
       </div>
       <div className="search-form__line" />
-    </div>
+    </form>
   );
 };
 

@@ -3,8 +3,8 @@ import "./Profile.css";
 
 const Profile = () => {
   return (
-    <div className="profile">
-      <h2 className="profile__header">Привет, Айза!</h2>
+    <section className="profile">
+      <h1 className="profile__header">Привет, Айза!</h1>
       <div className="profile__about">
         <p className="profile__about_text">Имя</p>
         <p className="profile__about_text">Айза</p>
@@ -15,8 +15,10 @@ const Profile = () => {
         <p className="profile__about_text">pochta@yandex.ru</p>
       </div>
       <p className="profile__edit">Редактировать</p>
-      <p className="profile__logout">Выйти из аккаунта</p>
-    </div>
+      <a href="/signin" target="_blank" className="profile__logout">
+        Выйти из аккаунта
+      </a>
+    </section>
   );
 };
 

@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 
 const Register = () => {
   return (
-    <div className="register">
+    <section className="register">
       <div className="register__header">
         <img src={logo} alt="logo" className="register__logo" />
         <h2 className="register__message">Добро пожаловать!</h2>
@@ -13,22 +13,42 @@ const Register = () => {
         <label for="name" className="register__form_label">
           Имя
         </label>
-        <input className="register__form_input"></input>
+        <input
+          className="register__form_input"
+          required
+          placeholder="Введите Имя..."
+          minLength={2}
+          maxLength={40}
+        />
         <label for="email" className="register__form_label">
           E-mail
         </label>
-        <input className="register__form_input"></input>
+        <input
+          className="register__form_input"
+          required
+          placeholder="Введите E-mail..."
+        />
         <label for="password" className="register__form_label">
           Пароль
         </label>
-        <input className="register__form_input"></input>
-        <button className="register__form_submit">Зарегистрироваться</button>
+        <input
+          className="register__form_input"
+          required
+          placeholder="Введите пароль..."
+          minLength={2}
+          maxLength={40}
+        />
+        <button className="register__form_submit" type="submit">
+          Зарегистрироваться
+        </button>
         <p className="register__form_subtitle">
           Уже зарегистрированы?
-          <span className="register__form_span">Войти</span>
+          <a href="/signin" className="register__form_span">
+            Войти
+          </a>
         </p>
       </form>
-    </div>
+    </section>
   );
 };
 

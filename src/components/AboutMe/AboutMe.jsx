@@ -4,9 +4,8 @@ import photo from "../../images/photo.jpeg";
 
 const AboutMe = () => {
   return (
-    <div className="about-me" id="about-me">
+    <section className="about-me" id="about-me">
       <h2 className="about-me__header">Студент</h2>
-      <div className="about-me__line"></div>
       <div className="about-me__flex">
         <div className="about-me__column">
           <h3 className="about-me__column_name">Айза</h3>
@@ -23,12 +22,12 @@ const AboutMe = () => {
             target="_blank"
             className="about-me__column_link"
           >
-            GitHub
+            Github
           </a>
         </div>
-        <img src={photo} alt="photo" className="about-me__photo"></img>
+        <img src={photo} alt="photo" className="about-me__photo" />
       </div>
-    </div>
+    </section>
   );
 };
 

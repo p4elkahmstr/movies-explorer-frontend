@@ -3,6 +3,10 @@
     height: 38px;
 }
 
+.header__logo_link:hover {
+    opacity: 0.5;
+}
+
 .header {
     display: flex;
     flex-direction: row;
@@ -27,6 +31,12 @@
     background-color: inherit;
     color: #ffffff;
     padding: 0;
+    text-decoration: none;
+}
+
+.header__navigation_button:hover {
+    color: #808080;
+    cursor: pointer;
 }
 
 .header__button {
@@ -40,6 +50,11 @@
     font-weight: 500;
     line-height: 1.1428;
     margin-left: 364px;
+}
+
+.header__button:hover {
+    cursor: pointer;
+    color: #808080;
 }
 
 .header__auth {
@@ -79,6 +94,7 @@
 @media (max-width: 1279px) and (min-width: 768px) {
     .header {
         margin: 16px 30px;
+        max-width: calc(708px + (1140 - 708) * (100vw - 768px) / (1279 - 768));
     }
     
     .header__button {
@@ -90,7 +106,11 @@
     }
 
     .header__burger {
-        display: block;
+        display: flex;
+    }
+
+    .disable-link{
+        pointer-events: none;
     }
 }
 

@@ -59,6 +59,9 @@
     height: 45px;
     width: 100%;
     color: #ffffff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
 }
 
 .login__form_subtitle {
@@ -67,11 +70,15 @@
     line-height: 1.21;
     text-align: center;
     color: #8B8B8B;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
 }
 
 .login__form_span {
     color:#4285F4;
     margin-left: 6px;
+    text-decoration: none;
 }
 
 @media (max-width: 1279px) and (min-width: 768px) {
@@ -82,7 +89,7 @@
 
 @media (max-width: 767px) and (min-width: 320px) {
     .login {
-        margin: 56px 30px 30px;
+        margin: 56px auto 30px;
     }
 
     .login__header {

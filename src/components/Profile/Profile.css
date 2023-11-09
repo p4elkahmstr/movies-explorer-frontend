@@ -43,6 +43,9 @@
     line-height: 1.21;
     text-align: center;
     color: #EE3465;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 1279px) and (min-width: 768px) {
@@ -61,7 +64,7 @@
 
 @media (max-width: 767px) and (min-width: 320px) {
     .profile {
-        margin: 87px 30px 40px;
+        margin: 87px auto 40px;
     }
 
     .profile__header {
@@ -70,5 +73,12 @@
 
     .profile__edit {
         margin: 379px auto 16px;
+        font-size: 12px;
+        line-height: 1.21;
+    }
+
+    .profile__logout {
+        font-size: 12px;
+        line-height: 1.21;
     }
 }

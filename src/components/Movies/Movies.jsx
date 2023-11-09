@@ -5,11 +5,13 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 const Movies = () => {
   return (
-    <div className="movies" id="movies">
+    <section className="movies" id="movies">
       <SearchForm />
       <MoviesCardList />
-      <button className="movies__more-btn">Ещё</button>
-    </div>
+      <button className="movies__more-btn" type="button">
+        Ещё
+      </button>
+    </section>
   );
 };
 

@@ -30,6 +30,11 @@
     padding: 0;
 }
 
+.search-form__container_button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
 .search-form__switch {
     display: flex;
     flex-direction: row;
