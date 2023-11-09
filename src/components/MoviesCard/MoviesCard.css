@@ -36,7 +36,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 11px 14px 0;
+    margin: 14px 14px 0;
 }
 
 .movies-card__subtitle_title {
@@ -65,7 +65,8 @@
 @media (max-width: 1279px) and (min-width: 768px) {
 
     .movies-card {
-        width: calc(339px + (360 - 339) * (100wv - 768px) / (1279 - 768));
+        /* width: calc(339px + (360 - 339) * (100wv - 768px) / (1279 - 768)); */
+        width: 339px;
     }
 
     .movies-card__subtitle {

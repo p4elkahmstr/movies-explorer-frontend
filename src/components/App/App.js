@@ -21,7 +21,6 @@ function App() {
             <>
               <Header />
               <Main />
-              <Navigation />
               <Footer />
             </>
           } />
@@ -31,7 +30,6 @@ function App() {
             <>
               <Header />
               <Profile />
-              <Navigation />
             </>
           } />
           <Route path="/notfounderror" element={<NotFoundError />} />
@@ -39,7 +37,6 @@ function App() {
             <>
               <Header />
               <Movies />
-              <Navigation />
               <Footer />
             </>
           } />
@@ -47,7 +44,6 @@ function App() {
             <>
               <Header />
               <SavedMovies />
-              <Navigation />
               <Footer />
             </>
           } />

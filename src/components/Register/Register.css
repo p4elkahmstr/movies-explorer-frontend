@@ -80,13 +80,19 @@
 
 @media (max-width: 1279px) and (min-width: 768px) {
     .register {
-        margin: 232px auto;
+        margin-top: 232px;
+        margin-bottom: 232px;
+        margin-left: calc(186px + (442 - 186) * (100vw - 768px) / (1279 - 768));
+        margin-right: calc(186px + (442 - 186) * (100vw - 768px) / (1279 - 768));
     }
 }
 
 @media (max-width: 767px) and (min-width: 320px) {
     .register {
-        margin: 56px auto 30px;
+        margin-top: 56px;
+        margin-bottom: 30px;
+        margin-left: calc(30px + (186 - 30) * (100vw - 320px) / (767 - 320));
+        margin-right: calc(30px + (186 - 30) * (100vw - 320px) / (767 - 320));
     }
 
     .register__header {

@@ -1,12 +1,15 @@
 import React from "react";
 import "./Login.css";
 import logo from "../../images/logo.svg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
     <section className="login">
       <div className="login__header">
-        <img src={logo} alt="logo" className="login__logo" />
+        <Link to="/" className="login__logo_link">
+          <img src={logo} alt="logo" className="login__logo" />
+        </Link>
         <h2 className="login__message">Рады видеть!</h2>
       </div>
       <form className="login__form">

@@ -20,8 +20,11 @@
 
 @media (max-width: 1279px) and (min-width: 768px) {
     .promo {
-        width: 728px;
-        margin: 35px auto 0;
+        width: calc(728px + (1200 - 728) * (100vw - 768px) / (1279 - 768));
+        margin-top: 35px;
+        margin-bottom: 0;
+        margin-left: calc(20px + (40 - 20) * (100vw - 768px) / (1279 - 768));
+        margin-right: calc(20px + (40 - 20) * (100vw - 768px) / (1279 - 768));
         height: 834px;
         font-size: 40px;
         line-height: 1.3;
@@ -37,7 +40,7 @@
 @media (max-width: 767px) and (min-width: 320px) {
     .promo {
         margin: 28px auto 0;
-        width: 292px;
+        width: calc(292px + (728 - 292) * (100vw - 320px) / (767 - 320));
         height: 586px;
         font-size: 29px;
         line-height: 1.2758;

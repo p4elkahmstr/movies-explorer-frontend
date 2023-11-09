@@ -24,6 +24,7 @@
     font-size: 13px;
     line-height: 1.3846;
     margin-left: 426px;
+    visibility: visible;
 }
 
 .header__navigation_button {
@@ -50,6 +51,7 @@
     font-weight: 500;
     line-height: 1.1428;
     margin-left: 364px;
+    visibility: visible;
 }
 
 .header__button:hover {
@@ -91,26 +93,33 @@
     display: none;
 }
 
+.header__link-button {
+    visibility: visible;
+    width: 0;
+}
+
+.h {
+    display: block;
+}
+
 @media (max-width: 1279px) and (min-width: 768px) {
     .header {
-        margin: 16px 30px;
-        max-width: calc(708px + (1140 - 708) * (100vw - 768px) / (1279 - 768));
+        margin-top: 16px;
+        margin-bottom: 16px;
+        margin-left: calc(30px + (70 - 30) * (100vw - 768px) / (1279 - 768));
+        margin-right: calc(30px + (70 - 30) * (100vw - 768px) / (1279 - 768));
     }
     
-    .header__button {
+    .h {
         display: none;
     }
 
     .header__navigation {
-        display: none;
+        visibility: hidden;
     }
 
     .header__burger {
         display: flex;
-    }
-
-    .disable-link{
-        pointer-events: none;
     }
 }
 
@@ -119,7 +128,7 @@
         margin: 18px 14px;
     }
 
-    .header__button {
+    .h {
         display: none;
     }
 
@@ -147,5 +156,9 @@
     .header__auth_signin {
         width: 54px;
         height: 26px;
+    }
+
+    .header__burger {
+        visibility: visible;
     }
 }

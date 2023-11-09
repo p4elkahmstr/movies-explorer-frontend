@@ -6,14 +6,21 @@ import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
 const Header = () => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+
+  const handleBurgerMenu = () => {
+    setIsBurgerMenuOpen(!isBurgerMenuOpen);
+    console.log(isBurgerMenuOpen);
+  };
+
   return (
     <header className="header">
       <Link to="/" className="header__logo_link">
         <img src={logo} alt="logo" className="header__logo" />
       </Link>
 
-      {!auth ? (
+      {auth ? (
         <>
           <div className="header__navigation">
             <a
@@ -31,13 +38,23 @@ const Header = () => {
               Сохранённые фильмы
             </a>
           </div>
-          <img className="header__burger" alt="burger" src={burger} />
-          <Link className="disable-link" to="/profile" target="_blank">
-            <button className="header__button" type="button">
-              Аккаунт
-            </button>
-          </Link>
-          <Navigation />
+          <img
+            className="header__burger"
+            alt="burger"
+            src={burger}
+            onClick={handleBurgerMenu}
+          />
+          <div className="h">
+            <a className="header__link-button" href="/profile" target="_blank">
+              <button className="header__button" type="button">
+                Аккаунт
+              </button>
+            </a>
+          </div>
+          <Navigation
+            isOpen={isBurgerMenuOpen}
+            onClose={() => setIsBurgerMenuOpen(false)}
+          />
         </>
       ) : (
         <>

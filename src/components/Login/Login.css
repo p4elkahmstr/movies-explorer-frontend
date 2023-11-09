@@ -87,9 +87,16 @@
     }
 }
 
+* {
+    outline: 1px solid red;
+}
+
 @media (max-width: 767px) and (min-width: 320px) {
     .login {
-        margin: 56px auto 30px;
+        margin-top: 56px;
+        margin-bottom: 30px;
+        margin-left: calc(30px + (186 - 30) * (100vw - 320px) / (767 - 320));
+        margin-right: calc(30px + (186 - 30) * (100vw - 320px) / (767 - 320));
     }
 
     .login__header {

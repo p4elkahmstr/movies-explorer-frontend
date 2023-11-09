@@ -1,12 +1,15 @@
 import React from "react";
 import "./Register.css";
 import logo from "../../images/logo.svg";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
     <section className="register">
       <div className="register__header">
-        <img src={logo} alt="logo" className="register__logo" />
+        <Link to="/" className="register__logo_link">
+          <img src={logo} alt="logo" className="register__logo" />
+        </Link>
         <h2 className="register__message">Добро пожаловать!</h2>
       </div>
       <form className="register__form">
