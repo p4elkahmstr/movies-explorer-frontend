@@ -8,9 +8,9 @@ const AboutMe = () => {
       <h2 className="about-me__header">Студент</h2>
       <div className="about-me__flex">
         <div className="about-me__column">
-          <h3 className="about-me__column_name">Айза</h3>
-          <h4 className="about-me__column_subtitle">Веб-разработчик, 26 лет</h4>
-          <p className="about-me__column_description">
+          <h3 className="about-me__column-name">Айза</h3>
+          <h4 className="about-me__column-subtitle">Веб-разработчик, 26 лет</h4>
+          <p className="about-me__column-description">
             Я родилась в северном городке - Якутске, переехала в Москву в этом
             году. У меня есть муж и две красавицы-дочки. Я люблю порядок и
             чистоту, а еще учиться новому. С 2020 года работаю инженером в ПАО
@@ -20,7 +20,7 @@ const AboutMe = () => {
           <a
             href="https://github.com/p4elkahmstr"
             target="_blank"
-            className="about-me__column_link"
+            className="about-me__column-link"
           >
             Github
           </a>

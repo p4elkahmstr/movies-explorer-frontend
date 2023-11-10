@@ -39,7 +39,7 @@
     margin: 14px 14px 0;
 }
 
-.movies-card__subtitle_title {
+.movies-card__subtitle-title {
     font-weight: 500;
     font-size: 13px;
     line-height: 1.21;
@@ -47,7 +47,7 @@
     margin: 0;
 }
 
-.movies-card__subtitle_duration {
+.movies-card__subtitle-duration {
     font-weight: 400;
     font-size: 11px;
     line-height: 0.9091;
@@ -65,7 +65,6 @@
 @media (max-width: 1279px) and (min-width: 768px) {
 
     .movies-card {
-        /* width: calc(339px + (360 - 339) * (100wv - 768px) / (1279 - 768)); */
         width: 339px;
     }
 
@@ -102,7 +101,7 @@
         width: 300px;
     }
 
-    .movies-card__subtitle_title {
+    .movies-card__subtitle-title {
         font-size: 12px;
         line-height: 1.21;
     }

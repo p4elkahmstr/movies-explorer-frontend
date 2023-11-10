@@ -9,13 +9,13 @@ const Footer = () => {
       </p>
       <div className="footer__line"></div>
       <div className="footer__copyright">
-        <p className="footer__copyright_year">&copy; 2023</p>
-        <ul className="footer__copyright_links">
+        <p className="footer__copyright-year">&copy; 2023</p>
+        <ul className="footer__copyright-links">
           <li>
             <a
               href="https://practicum.yandex.ru/"
               target="_blank"
-              className="footer__copyright_links_link"
+              className="footer__copyright-link"
             >
               Яндекс.Практикум
             </a>
@@ -24,7 +24,7 @@ const Footer = () => {
             <a
               href="https://github.com/p4elkahmstr"
               target="_blank"
-              className="footer__copyright_links_link"
+              className="footer__copyright-link"
             >
               Github
             </a>

@@ -3,13 +3,13 @@
 }
 
 .about-project__header {
-    margin-top: 140px;
+    margin-top: 110px;
     font-weight: 400;
     font-size: 22px;
     line-height: 1.2104;
     letter-spacing: -1px;
     padding-bottom: 23px;
-    border-bottom: 1px solid #DADADA;;
+    border-bottom: 1px solid #DADADA;
 }
 
 .about-project__info {
@@ -22,7 +22,7 @@
     justify-content: center;
 }
 
-.about-project___info_title {
+.about-project__info-title {
     margin: 0;
     font-weight: 400;
     font-size: 20px;
@@ -30,7 +30,7 @@
     letter-spacing: -0.8px;
 }
 
-.about-project__info_subtitle {
+.about-project__info-subtitle {
     margin: 0;
     font-weight: 400;
     font-size: 14px;
@@ -45,7 +45,7 @@
     margin-bottom: 110px;
 }
 
-.about-project__scale_week-one {
+.about-project__scale-week-one {
     background-color: #3DDC84;
     color: #000000;
     font-weight: 400;
@@ -57,7 +57,7 @@
     margin: 0;
 }
 
-.about-project__scale_week-four {
+.about-project__scale-week-four {
     background-color: #303030;
     font-weight: 400;
     font-size: 14px;
@@ -68,7 +68,7 @@
     margin: 0;
 }
 
-.about-project__scale_subtitle {
+.about-project__scale-subtitle {
     margin: 0;
     color: #8B8B8B;
     font-weight: 500;
@@ -86,7 +86,7 @@
     }
 
     .about-project__header {
-        margin-top: 118px;
+        margin-top: 90px;
     }
 
     .about-project__info {
@@ -97,12 +97,12 @@
         width: calc(100% - 50 * 2);
     }
 
-    .about-project__info_subtitle {
+    .about-project__info-subtitle {
         font-size: 12px;
         line-height: 1.5;
     }
 
-    .about-project__scale_week-one {
+    .about-project__scale-week-one {
         width: calc(140px + (228 - 140) * (100vw - 768px) / (1279 - 768));
     }
 
@@ -117,7 +117,7 @@
     }
 
     .about-project__header {
-        margin-top: 87px;
+        margin-top: 70px;
         font-size: 18px;
         line-height: 1.21;
         letter-spacing: -0.7px;
@@ -154,7 +154,7 @@
         line-height: 1.4545;
     }
 
-    .about-project___info_title {
+    .about-project__info-title {
         font-size: 18px;
         line-height: 1.21;
     }
@@ -165,19 +165,19 @@
         margin-top: 60px;
     }
 
-    .about-project__scale_week-one {
+    .about-project__scale-week-one {
         font-size: 11px;
         line-height: 1.21;
         width: calc(100px + (140 - 100) * (100vw - 320px) / (767 - 320));
 
     }
 
-    .about-project__scale_week-four {
+    .about-project__scale-week-four {
         font-size: 11px;
         line-height: 1.21;
     }
 
-    .about-project__scale_subtitle {
+    .about-project__scale-subtitle {
         font-size: 11px;
         line-height: 1.21;
     }

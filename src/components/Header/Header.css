@@ -3,7 +3,7 @@
     height: 38px;
 }
 
-.header__logo_link:hover {
+.header__logo-link:hover {
     opacity: 0.5;
 }
 
@@ -27,7 +27,7 @@
     visibility: visible;
 }
 
-.header__navigation_button {
+.header__navigation-button {
     border: none;
     background-color: inherit;
     color: #ffffff;
@@ -35,12 +35,17 @@
     text-decoration: none;
 }
 
-.header__navigation_button:hover {
+.header__navigation-button:hover {
     color: #808080;
     cursor: pointer;
 }
 
+.header__saved-movies {
+    width: 142px;
+}
+
 .header__button {
+    display: inline-block;
     background-color: #313131;
     border: none;
     border-radius: 20px;
@@ -49,9 +54,11 @@
     color: #ffffff;
     font-size: 14px;
     font-weight: 500;
-    line-height: 1.1428;
+    line-height: 2;
     margin-left: 364px;
     visibility: visible;
+    text-decoration: none;
+    text-align: center;
 }
 
 .header__button:hover {
@@ -75,7 +82,6 @@
     border-radius: 3px;
     width: 76px;
     height: 32px;
-    padding: 0;
 }
 
 .header__auth_signup {
@@ -93,37 +99,28 @@
     display: none;
 }
 
-.header__link-button {
-    visibility: visible;
-    width: 0;
-}
-
 .h {
     display: block;
 }
 
-@media (max-width: 1279px) and (min-width: 768px) {
+@media (max-width: 1279px) and (min-width: 769px) {
     .header {
         margin-top: 16px;
         margin-bottom: 16px;
-        margin-left: calc(30px + (70 - 30) * (100vw - 768px) / (1279 - 768));
-        margin-right: calc(30px + (70 - 30) * (100vw - 768px) / (1279 - 768));
-    }
-    
-    .h {
-        display: none;
+        margin-left: calc(30px + (70 - 30) * (100vw - 769px) / (1279 - 769));
+        margin-right: calc(30px + (70 - 30) * (100vw - 769px) / (1279 - 769));
     }
 
     .header__navigation {
-        visibility: hidden;
+        margin-left: calc(220px + (426 - 220) * (100vw - 769px) / (1279 - 769));
     }
 
-    .header__burger {
-        display: flex;
+    .header__button {
+        margin-left: calc(140px + (364 - 140) * (100vw - 769px) / (1279 - 769));
     }
 }
 
-@media (max-width: 767px) and (min-width: 320px) {
+@media (max-width: 768px) and (min-width: 320px) {
     .header {
         margin: 18px 14px;
     }

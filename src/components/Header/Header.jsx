@@ -15,25 +15,20 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <Link to="/" className="header__logo_link">
+    <header className="header ">
+      <Link to="/" className="header__logo-link">
         <img src={logo} alt="logo" className="header__logo" />
       </Link>
 
       {auth ? (
         <>
           <div className="header__navigation">
-            <a
-              href="movies"
-              target="_blank"
-              className="header__navigation_button"
-            >
+            <a href="movies" className="header__navigation-button">
               Фильмы
             </a>
             <a
               href="saved-movies"
-              target="_blank"
-              className="header__navigation_button"
+              className="header__navigation-button header__saved-movies"
             >
               Сохранённые фильмы
             </a>
@@ -45,10 +40,8 @@ const Header = () => {
             onClick={handleBurgerMenu}
           />
           <div className="h">
-            <a className="header__link-button" href="/profile" target="_blank">
-              <button className="header__button" type="button">
-                Аккаунт
-              </button>
+            <a className="header__button" href="/profile">
+              Аккаунт
             </a>
           </div>
           <Navigation

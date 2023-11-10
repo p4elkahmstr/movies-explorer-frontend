@@ -5,13 +5,15 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 const Movies = () => {
   return (
-    <section className="movies" id="movies">
-      <SearchForm />
-      <MoviesCardList />
-      <button className="movies__more-btn" type="button">
-        Ещё
-      </button>
-    </section>
+    <main>
+      <section className="movies" id="movies">
+        <SearchForm />
+        <MoviesCardList />
+        <button className="movies__more-btn" type="button">
+          Ещё
+        </button>
+      </section>
+    </main>
   );
 };
 

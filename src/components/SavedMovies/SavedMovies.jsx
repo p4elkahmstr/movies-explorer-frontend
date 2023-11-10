@@ -6,10 +6,12 @@ import SearchForm from "../SearchForm/SearchForm";
 
 const SavedMovies = () => {
   return (
-    <section className="saved-movies" id="saved-movies">
-      <SearchForm />
-      <MoviesCardList />
-    </section>
+    <main>
+      <section className="saved-movies" id="saved-movies">
+        <SearchForm />
+        <MoviesCardList />
+      </section>
+    </main>
   );
 };
 

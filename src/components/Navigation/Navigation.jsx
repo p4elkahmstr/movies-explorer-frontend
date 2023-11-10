@@ -4,29 +4,33 @@ import "./Navigation.css";
 const Navigation = ({ isOpen, onClose }) => {
   return (
     <nav
-      className={`navigations${isOpen === true ? "_opened" : ""}`}
+      className={`navigations ${isOpen === true ? "navigations_opened" : ""}`}
       onClick={onClose}
     >
       <div className="navigation">
         <div className="navigation__container">
-          <button className="navigation__close" type="button" />
+          <button
+            className="navigation__close"
+            type="button"
+            onClick={onClose}
+          />
           <div className="navigation__links">
-            <a className="navigation__links_link" href="/">
+            <a className="navigation__links-link" href="/">
               Главная
             </a>
             <a
-              className="navigation__links_link navigation__links_link_active"
+              className="navigation__links-link navigation__links-link_active"
               href="movies"
             >
               Фильмы
             </a>
-            <a className="navigation__links_link" href="saved-movies">
+            <a className="navigation__links-link" href="saved-movies">
               Сохранённые фильмы
             </a>
           </div>
-          <button className="navigation__links_button" type="button">
+          <a href="profile" className="navigation__links-button">
             Аккаунт
-          </button>
+          </a>
         </div>
       </div>
     </nav>

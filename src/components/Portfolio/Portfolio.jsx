@@ -13,11 +13,11 @@ const Portfolio = () => {
             href="https://github.com/p4elkahmstr/how-to-learn"
             target="_blank"
           >
-            <p className="portfolio__link_name">Статичный сайт</p>
+            <p className="portfolio__link-name">Статичный сайт</p>
             <img
               src={arrow}
               alt="arrow"
-              className="portfolio__link_arrow"
+              className="portfolio__link-arrow"
             ></img>
           </a>
         </li>
@@ -27,25 +27,25 @@ const Portfolio = () => {
             href="https://github.com/p4elkahmstr/russian-travel"
             target="_blank"
           >
-            <p className="portfolio__link_name">Адаптивный сайт</p>
+            <p className="portfolio__link-name">Адаптивный сайт</p>
             <img
               src={arrow}
               alt="arrow"
-              className="portfolio__link_arrow"
+              className="portfolio__link-arrow"
             ></img>
           </a>
         </li>
         <li>
           <a
-            className="portfolio__link portfolio__link_border-none"
+            className="portfolio__link portfolio__link-border-none"
             href="https://mesto.pr15.nomoredomainsrocks.ru/signin"
             target="_blank"
           >
-            <p className="portfolio__link_name">Одностраничное приложение</p>
+            <p className="portfolio__link-name">Одностраничное приложение</p>
             <img
               src={arrow}
               alt="arrow"
-              className="portfolio__link_arrow"
+              className="portfolio__link-arrow"
             ></img>
           </a>
         </li>

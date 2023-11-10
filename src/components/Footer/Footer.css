@@ -21,13 +21,13 @@
     justify-content: space-between;
 }
 
-.footer__copyright_year {
+.footer__copyright-year {
     font-weight: 400;
     font-size: 13px;
     line-height: 1.21;
 }
 
-.footer__copyright_links {
+.footer__copyright-links {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -36,7 +36,7 @@
     padding: 0;
 }
 
-.footer__copyright_links_link {
+.footer__copyright-link {
     font-weight: 400;
     font-size: 13px;
     line-height: 1.21;
@@ -70,13 +70,14 @@
         gap: 20px;
     }
 
-    .footer__copyright_links {
+    .footer__copyright-links {
         flex-direction: column;
         margin-top: 30px;
+        margin-bottom: 0;
         gap: 12px;
     }
 
-    .footer__copyright_links_link {
+    .footer__copyright-link {
         font-size: 12px;
         line-height: 1.21;
     }
@@ -85,8 +86,9 @@
         margin-bottom: 0;
     }
 
-    .footer__copyright_year {
+    .footer__copyright-year {
         font-size: 12px;
         line-height: 1.21;
+        margin: 0;
     }
 }

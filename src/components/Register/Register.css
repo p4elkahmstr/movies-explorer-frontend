@@ -15,7 +15,7 @@
 }
 
 .register__message {
-    margin: 40px 0;
+    margin: 38px 0;
     font-weight: 500;
     font-size: 24px;
     line-height: 1.2104;
@@ -27,7 +27,7 @@
     flex-direction: column;
 }
 
-.register__form_label {
+.register__form-label {
     margin: 0;
     margin-bottom: 10px;
     font-weight: 400;
@@ -36,7 +36,7 @@
     color: #8B8B8B;
 }
 
-.register__form_input {
+.register__form-input {
     border: none;
     border-radius: 8px;
     background-color: #2F2F2F;
@@ -51,7 +51,7 @@
     padding-right: 15px;
 }
 
-.register__form_submit {
+.register__form-submit {
     margin: 70px auto 3px;
     background-color: #4285F4;
     border: none;
@@ -64,7 +64,12 @@
     line-height: 1.21;
 }
 
-.register__form_subtitle {
+.register__form-submit:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.register__form-subtitle {
     font-weight: 400;
     font-size: 14px;
     line-height: 1.21;
@@ -72,7 +77,7 @@
     color: #8B8B8B;
 }
 
-.register__form_span {
+.register__form-span {
     color:#4285F4;
     margin-left: 6px;
     text-decoration: none;
@@ -84,6 +89,10 @@
         margin-bottom: 232px;
         margin-left: calc(186px + (442 - 186) * (100vw - 768px) / (1279 - 768));
         margin-right: calc(186px + (442 - 186) * (100vw - 768px) / (1279 - 768));
+    }
+
+    .register__message {
+        margin-top: 35px;
     }
 }
 
@@ -100,17 +109,17 @@
     }
 
     .register__message {
-        margin-top: 50px;
+        margin-top: 45px;
         margin-bottom: 80px;
     }
 
-    .register__form_submit {
+    .register__form-submit {
         margin-top: 157px;
         font-size: 12px;
         line-height: 1.21;
     }
 
-    .register__form_subtitle {
+    .register__form-subtitle {
         font-size: 12px;
         line-height: 1.21;
     }
