@@ -1,0 +1,138 @@
+.search-form {
+    margin: 0;
+}
+
+.search-form__container {
+    margin: 95px auto 28px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-form__container-input {
+    border: none;
+    border-radius: 8px;
+    background-color: #2F2F2F;
+    padding: 16px 20px;
+    width: 1046px;
+    color: #8B8B8B;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2857;
+}
+
+.search-form__container-button {
+    background-color: inherit;
+    border: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+}
+
+.search-form__container-button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.search-form__switch {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    height: 18px;
+}
+
+.search-form__checkbox {
+display: inline-block;
+}
+
+.search-form__checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    appearance: none;
+}
+
+.search-form__checkbox-inner {
+    display: inline-block;
+    position: relative;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.5;
+    padding-left: 46px;
+}
+
+.search-form__checkbox-inner::before {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 34px;
+    height: 14px;
+    border-radius: 20px;
+    background-color: #343434;
+    transition: background-color .3s;
+}
+
+.search-form__checkbox-inner::after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #A0A0A0;
+    left: 2px;
+    top: 2px;
+    transition: background-color .3s, left .3s;
+}
+
+.search-form__checkbox-input:checked + .search-form__checkbox-inner::before {
+    background-color: #3DDC84;
+}
+
+.search-form__checkbox-input:checked + .search-form__checkbox-inner::after {
+    background-color: #ffffff;
+    left: 22px;
+}
+
+.search-form__line {
+    border: 1px solid #424242;
+    margin: 40px auto 10px;
+}
+
+@media (max-width: 1279px) and (min-width: 768px) {
+    .search-form__container {
+        display: flex;
+        justify-content: center;
+        margin: 95px 0 40px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 320px) {
+    .search-form {
+        margin: 0 4px 0;
+    }
+
+    .search-form__container-input {
+        padding: 13px 13px;
+    }
+
+    .search-form__switch {
+        font-size: 11px;
+        line-height: 1.6363;
+        gap: 13px;
+    }
+
+    .search-form__container {
+        margin-bottom: 46px;
+    }
+
+    .search-form__line {
+        margin-bottom: 48px;
+    }
+}
