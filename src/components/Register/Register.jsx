@@ -2,8 +2,16 @@ import React from "react";
 import "./Register.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import useFormWithValidation from "../../hooks/useFormValidation";
 
-const Register = () => {
+const Register = ({ handleRegister }) => {
+  const { values, errors, isFormValid, onChange } = useFormWithValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleRegister(values);
+  }
+
   return (
     <main>
       <section className="register">
@@ -13,8 +21,12 @@ const Register = () => {
           </Link>
           <h1 className="register__message">Добро пожаловать!</h1>
         </div>
-        <form className="register__form">
-          <label for="name" className="register__form-label">
+        <form
+          className="register__form"
+          onSubmit={handleSubmit}
+          name="register"
+        >
+          <label htmlFor="name" className="register__form-label">
             Имя
           </label>
           <input
@@ -24,27 +36,60 @@ const Register = () => {
             minLength={2}
             maxLength={40}
             id="name"
+            name="name"
+            form="register"
+            onChange={onChange}
+            value={values.name || ""}
           />
-          <label for="email" className="register__form-label">
+          <span
+            className={`register__form-input-error ${
+              errors.name ? "register__form-input-error_active" : ""
+            }`}
+          >
+            {errors.name || ""}
+          </span>
+          <label htmlFor="email" className="register__form-label">
             E-mail
           </label>
           <input
             id="email"
+            name="email"
             className="register__form-input"
             required
             placeholder="Введите E-mail..."
+            form="register"
+            onChange={onChange}
+            value={values.email || ""}
           />
-          <label for="password" className="register__form-label">
+          <span
+            className={`register__form-input-error ${
+              errors.email ? "register__form-input-error_active" : ""
+            }`}
+          >
+            {errors.email || ""}
+          </span>
+          <label htmlFor="password" className="register__form-label">
             Пароль
           </label>
           <input
             id="password"
+            name="password"
             className="register__form-input"
             required
             placeholder="Введите пароль..."
             minLength={2}
             maxLength={40}
+            form="register"
+            onChange={onChange}
+            value={values.password || ""}
           />
+          <span
+            className={`register__form-input-error ${
+              errors.password ? "register__form-input-error_active" : ""
+            }`}
+          >
+            {errors.password || ""}
+          </span>
           <button className="register__form-submit" type="submit">
             Зарегистрироваться
           </button>

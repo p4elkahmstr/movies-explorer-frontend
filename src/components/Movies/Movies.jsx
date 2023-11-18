@@ -2,19 +2,52 @@ import React from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
+import { useLocation } from "react-router-dom";
 
-const Movies = () => {
+function Movies({
+  value,
+  onCheck,
+  onChange,
+  isChecked,
+  onSearch,
+  renderedMovies,
+  showMoreMovies,
+  cards,
+  onAddToUserList,
+  onDelete,
+  didUserSearch,
+  savedMovies,
+  loading,
+}) {
+  const location = useLocation();
+
   return (
     <main>
       <section className="movies" id="movies">
-        <SearchForm />
-        <MoviesCardList />
-        <button className="movies__more-btn" type="button">
-          Ещё
-        </button>
+        <SearchForm
+          value={value}
+          onChange={onChange}
+          onSearch={onSearch}
+          onCheck={onCheck}
+          isChecked={isChecked}
+        />
+        {loading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            renderedMovies={renderedMovies}
+            onAddToUserList={onAddToUserList}
+            onDelete={onDelete}
+            showMoreMovies={showMoreMovies}
+            cards={cards}
+            didUserSearch={didUserSearch}
+            savedMovies={savedMovies}
+          />
+        )}
       </section>
     </main>
   );
-};
+}
 
 export default Movies;

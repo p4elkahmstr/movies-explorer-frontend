@@ -3,6 +3,10 @@
     position: relative;
 }
 
+.movies-card:hover {
+    cursor: pointer;
+}
+
 .movies-card__save-btn {
     position: absolute;
     width: 72px;
@@ -20,6 +24,10 @@
     line-height: 0.9;
     text-align: center;
     color: #ffffff;
+}
+
+.movies-card__save-btn:hover {
+    opacity: 0.8;
 }
 
 .movies-card__img {

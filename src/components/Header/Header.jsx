@@ -5,8 +5,7 @@ import burger from "../../images/burger.svg";
 import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-const Header = () => {
-  const [auth, setAuth] = useState(true);
+const Header = ({ auth }) => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const handleBurgerMenu = () => {
@@ -52,12 +51,16 @@ const Header = () => {
       ) : (
         <>
           <div className="header__auth">
-            <button className="header__auth_signup" type="submit">
-              Регистрация
-            </button>
-            <button className="header__auth_signin" type="submit">
-              Войти
-            </button>
+            <Link to="/signup">
+              <button className="header__auth_signup" type="submit">
+                Регистрация
+              </button>
+            </Link>
+            <Link to="/signin">
+              <button className="header__auth_signin" type="submit">
+                Войти
+              </button>
+            </Link>
           </div>
         </>
       )}

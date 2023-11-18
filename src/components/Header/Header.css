@@ -84,6 +84,11 @@
     height: 32px;
 }
 
+.header__auth_signin:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
 .header__auth_signup {
     background-color: inherit;
     border: none;
@@ -91,6 +96,11 @@
     width: 77px;
     height: 16px;
     padding: 0;
+}
+
+.header__auth_signup:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 .header__burger {
