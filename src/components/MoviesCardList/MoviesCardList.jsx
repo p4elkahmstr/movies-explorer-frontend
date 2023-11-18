@@ -22,11 +22,11 @@ const MoviesCardList = ({
     <>
       <section className="movies-card-list">
         {cards
-          .map((el, index) => (
+          .map((el) => (
             <MoviesCard
               card={el}
               onAddToUserList={onAddToUserList}
-              key={index}
+              key={el.movieId}
               savedMovies={savedMovies}
               onDelete={onDelete}
             />

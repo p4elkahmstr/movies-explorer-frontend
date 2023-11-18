@@ -19,7 +19,11 @@ const SearchForm = ({ onChange, onSearch, value, isChecked, onCheck }) => {
           minLength="2"
           maxLength="40"
         />
-        <button className="search-form__container-button" type="button">
+        <button
+          className="search-form__container-button"
+          type="button"
+          onClick={onSearch}
+        >
           <img
             src={find}
             alt="arrow"
