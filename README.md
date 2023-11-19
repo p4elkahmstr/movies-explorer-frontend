@@ -4,3 +4,5 @@ https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE
 https://github.com/p4elkahmstr/movies-explorer-frontend/compare/main...level-3?expand=1
 
 https://api.movies.diploma.nomoredomainsrocks.ru/
+
+https://movies.diploma.nomoredomainsrocks.ru/
