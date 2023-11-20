@@ -1,4 +1,11 @@
-import { BASE_URL_MOVIES, MAIN_API_URL } from "./constants";
+import { MAIN_API_URL } from "./constants";
+
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res.status);
+};
 
 const login = ({ email, password }) => {
   return fetch(`${MAIN_API_URL}/signin`, {
@@ -10,10 +17,7 @@ const login = ({ email, password }) => {
       email: email,
       password: password,
     }),
-  })
-    .then((res) => res.json())
-    .then((token) => token)
-    .catch((err) => Promise.reject(`${err.message}`));
+  }).then((res) => checkResponse(res));
 };
 
 const register = ({ name, email, password }) => {
@@ -27,26 +31,16 @@ const register = ({ name, email, password }) => {
       email: email,
       password: password,
     }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((e) => console.error(e));
+  }).then((res) => checkResponse(res));
 };
 
-const getUserInfo = (token) => {
+const getUserInfo = () => {
   return fetch(`${MAIN_API_URL}/users/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((e) => console.error(e));
+  }).then((res) => checkResponse(res));
 };
 
 const setUserInfo = (newDataOfUser) => {
@@ -60,9 +54,7 @@ const setUserInfo = (newDataOfUser) => {
       name: newDataOfUser.name,
       email: newDataOfUser.email,
     }),
-  })
-    .then((res) => res.json())
-    .catch((e) => console.log(e));
+  }).then((res) => checkResponse(res));
 };
 
 const getUserMovies = () => {
@@ -72,9 +64,7 @@ const getUserMovies = () => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
     },
-  })
-    .then((res) => res.json())
-    .catch((e) => console.log(e));
+  }).then((res) => checkResponse(res));
 };
 
 const addMovie = (movieCard) => {
@@ -97,7 +87,7 @@ const addMovie = (movieCard) => {
       thumbnail: movieCard.thumbnail,
       movieId: movieCard.movieId,
     }),
-  }).then((res) => res.json());
+  }).then((res) => checkResponse(res));
 };
 
 const deleteMovie = (id) => {
@@ -107,7 +97,7 @@ const deleteMovie = (id) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json());
+  }).then((res) => checkResponse(res));
 };
 
 export {

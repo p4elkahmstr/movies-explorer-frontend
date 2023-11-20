@@ -21,6 +21,8 @@ const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
     });
   }
 
+  console.log(values);
+
   useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
@@ -37,7 +39,7 @@ const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
   return (
     <section className="profile">
       <div className="profile__content">
-        <h1 className="profile__header">{`Привет, ${currentUser.name}!`}</h1>
+        <h1 className="profile__header">{`Привет, ${currentUser?.name}!`}</h1>
         <form action="#" className="profile__form" onSubmit={handleSubmit}>
           <label htmlFor="name-input" className="profile__form-item">
             Имя

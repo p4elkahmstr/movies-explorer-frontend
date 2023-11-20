@@ -69,6 +69,20 @@
     opacity: 0.5;
 }
 
+.register__form_error-message {
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 20px;
+    color: #ba2323;;
+    display: flex;
+    justify-content: center;
+}
+
+.register__form-submit[disabled] {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
 .register__form-subtitle {
     font-weight: 400;
     font-size: 14px;

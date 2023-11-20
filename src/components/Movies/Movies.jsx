@@ -20,8 +20,6 @@ function Movies({
   savedMovies,
   loading,
 }) {
-  const location = useLocation();
-
   return (
     <main>
       <section className="movies" id="movies">

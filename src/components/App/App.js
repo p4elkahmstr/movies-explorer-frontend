@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -46,32 +52,9 @@ function App() {
       if (localStorage.checkbox) {
         setIsChecked(JSON.parse(localStorage.checkbox));
       }
-      if (!localStorage.initialMovies) {
-        getInitialMovies()
-          .then((movies) => {
-            localStorage.setItem("initialMovies", JSON.stringify(movies));
-          })
-          .catch((e) => console.log(e));
-      }
-      if (localStorage.query) {
-        setQuery(localStorage.query);
-        const moviesToShow = mapToArray(
-          JSON.parse(localStorage.initialMovies).filter(
-            (movie) =>
-              movie.nameEN
-                .toLowerCase()
-                .includes(localStorage.query.toLowerCase()) ||
-              movie.nameRU
-                .toLowerCase()
-                .includes(localStorage.query.toLowerCase())
-          )
-        );
-        showByCheckboxState(moviesToShow);
-      }
       getUserMovies()
         .then((userMovies) => {
           showByCheckboxStateInSaved(userMovies);
-          localStorage.setItem("savedMovies", JSON.stringify(userMovies));
         })
         .catch((e) => console.log(e));
     }
@@ -103,18 +86,21 @@ function App() {
 
   function handleRegister({ name, email, password }) {
     setIsLoading(true);
-    try {
-      const userData = register({ name, email, password });
-      console.log(userData);
-      if (userData) {
-        handleLogin({ email, password });
-        navigate("/movies", { replace: true });
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsLoading(false);
-    }
+    register({ name, email, password })
+      .then((userData) => {
+        if (userData) {
+          handleLogin({ email, password });
+          navigate("/movies", { replace: true });
+        }
+      })
+      .catch((e) => {
+        if (e === 409) {
+          setMessage("Такой пользователь уже существует");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleLogin({ email, password }) {
@@ -127,6 +113,12 @@ function App() {
       })
       .catch((e) => {
         console.error(e);
+        if (e.status === 401) {
+          setMessage(
+            "Некорректные данные, пожалуйста, проверьте email и пароль"
+          );
+        }
+        setMessage("Что-то пошло не так, попробуйте зайти позднее");
       })
       .finally(() => {
         setIsLoading(false);
@@ -177,12 +169,19 @@ function App() {
     }
   };
 
-  function handleSearch(e, searchWord) {
+  async function handleSearch(e, searchWord) {
     e.preventDefault();
     if (!query) return;
     setIsLoading(true);
     localStorage.setItem("query", query);
     setQuery(searchWord);
+    if (!localStorage.initialMovies) {
+      await getInitialMovies()
+        .then((movies) => {
+          localStorage.setItem("initialMovies", JSON.stringify(movies));
+        })
+        .catch((e) => console.log(e));
+    }
     const moviesToMap = mapToArray(
       JSON.parse(localStorage.initialMovies).filter(
         (movie) =>
@@ -267,11 +266,31 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/signin"
-            element={<Login handleLogin={handleLogin} onLoading={isLoading} />}
+            element={
+              loggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Login
+                  handleLogin={handleLogin}
+                  onLoading={isLoading}
+                  errorMessage={message}
+                />
+              )
+            }
           />
           <Route
             path="/signup"
-            element={<Register handleRegister={handleRegister} />}
+            element={
+              loggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Register
+                  handleRegister={handleRegister}
+                  onLoading={isLoading}
+                  errorMessage={message}
+                />
+              )
+            }
           />
 
           <Route path="/" element={<ProtectedRoute loggedIn={loggedIn} />}>
@@ -307,6 +326,8 @@ function App() {
                   onCheck={handleToggleCheck}
                   savedMovies={savedMovies}
                   loading={isLoading}
+                  isChecked={isChecked}
+                  isMobile={isMobile}
                 />
               }
             />

@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import useFormWithValidation from "../../hooks/useFormValidation";
 
-const Login = ({ handleLogin, onLoading }) => {
+const Login = ({ handleLogin, onLoading, errorMessage }) => {
   const { values, errors, isFormValid, onChange } = useFormWithValidation();
 
   function handleSubmit(e) {
@@ -73,9 +73,14 @@ const Login = ({ handleLogin, onLoading }) => {
           >
             {errors.password || ""}
           </span>
-          <button className="login__form-submit" type="submit">
+          <button
+            className="login__form-submit"
+            type="submit"
+            disabled={!isFormValid || onLoading}
+          >
             Войти
           </button>
+          <p className="login__form_error-message">{errorMessage}</p>
           <p className="login__form-subtitle">
             Ещё не зарегистрированы?
             <a href="/signup" className="login__form-span">

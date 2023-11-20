@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import useFormWithValidation from "../../hooks/useFormValidation";
 
-const Register = ({ handleRegister }) => {
+const Register = ({ handleRegister, onLoading, errorMessage }) => {
   const { values, errors, isFormValid, onChange } = useFormWithValidation();
 
   function handleSubmit(e) {
@@ -24,7 +24,9 @@ const Register = ({ handleRegister }) => {
         <form
           className="register__form"
           onSubmit={handleSubmit}
+          isFormValid={isFormValid}
           name="register"
+          noValidate
         >
           <label htmlFor="name" className="register__form-label">
             Имя
@@ -40,6 +42,7 @@ const Register = ({ handleRegister }) => {
             form="register"
             onChange={onChange}
             value={values.name || ""}
+            disabled={onLoading ? true : false}
           />
           <span
             className={`register__form-input-error ${
@@ -60,6 +63,7 @@ const Register = ({ handleRegister }) => {
             form="register"
             onChange={onChange}
             value={values.email || ""}
+            disabled={onLoading ? true : false}
           />
           <span
             className={`register__form-input-error ${
@@ -74,6 +78,7 @@ const Register = ({ handleRegister }) => {
           <input
             id="password"
             name="password"
+            type="password"
             className="register__form-input"
             required
             placeholder="Введите пароль..."
@@ -82,6 +87,7 @@ const Register = ({ handleRegister }) => {
             form="register"
             onChange={onChange}
             value={values.password || ""}
+            disabled={onLoading ? true : false}
           />
           <span
             className={`register__form-input-error ${
@@ -90,9 +96,14 @@ const Register = ({ handleRegister }) => {
           >
             {errors.password || ""}
           </span>
-          <button className="register__form-submit" type="submit">
+          <button
+            className="register__form-submit"
+            type="submit"
+            disabled={!isFormValid || onLoading}
+          >
             Зарегистрироваться
           </button>
+          <p className="register__form_error-message">{errorMessage}</p>
           <p className="register__form-subtitle">
             Уже зарегистрированы?
             <a href="/signin" className="register__form-span">

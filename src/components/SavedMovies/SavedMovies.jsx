@@ -12,8 +12,8 @@ const SavedMovies = ({
   onCheck,
   onDelete,
   savedMovies,
+  isMobile,
 }) => {
-  console.log(cards);
   return (
     <main>
       <section className="saved-movies" id="saved-movies">
@@ -28,6 +28,7 @@ const SavedMovies = ({
           cards={cards}
           onDelete={onDelete}
           savedMovies={savedMovies}
+          isMobile={isMobile}
         />
       </section>
     </main>

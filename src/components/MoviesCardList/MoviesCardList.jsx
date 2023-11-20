@@ -11,6 +11,7 @@ const MoviesCardList = ({
   onAddToUserList,
   savedMovies,
   onDelete,
+  isMobile,
 }) => {
   const location = useLocation();
 
@@ -29,6 +30,7 @@ const MoviesCardList = ({
               key={el.movieId}
               savedMovies={savedMovies}
               onDelete={onDelete}
+              isMobile={isMobile}
             />
           ))
           .slice(0, renderedMovies)}

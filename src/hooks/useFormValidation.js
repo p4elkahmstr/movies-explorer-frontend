@@ -1,51 +1,56 @@
-import { useCallback, useState } from "react";
-var validator = require("email-validator");
+import { useCallback, useState, useEffect } from "react";
+import validator from "email-validator";
 
-// USE FORM WITH VALIDATION HOOK
 function useFormWithValidation() {
-  // HOOKS
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({ email: "", password: "", name: "" });
   const [errors, setErrors] = useState({});
   const [isFormValid, setFormValid] = useState(false);
 
-  // HANDLER INPUTS CHANGE
-  function onChange(e) {
-    const target = e.target;
-    const { value, name } = target;
-    if (name === "name" && target.validity.patternMismatch) {
-      target.setCustomValidity(
-        "Имя должно содержать только кириллицу, латиницу, пробел или дефис."
-      );
-    } else if (name === "email" && !validator.validate(value)) {
-      target.setCustomValidity(
-        "Необходимо указать e-mail в формате name@domain.zone"
-      );
-    } else {
-      target.setCustomValidity("");
-    }
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setFormValid(target.closest("form").checkValidity());
-  }
+  const handleInputChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
 
-  // HANDLER RESET VALIDATION ERRORS
-  const resetValidation = useCallback(
-    (isFormValid = false, values = {}, errors = {}) => {
-      setFormValid(isFormValid);
-      setValues(values);
-      setErrors(errors);
+      let emailError = "";
+      let nameError = "";
+
+      if (name === "name" && !/^[a-zA-Zа-яА-Я\s\-]+$/.test(value)) {
+        nameError =
+          "Имя должно содержать только кириллицу, латиницу, пробел или дефис.";
+      }
+
+      if (name === "email" && !validator.validate(value)) {
+        emailError = "Необходимо указать e-mail в формате name@domain.zone";
+      }
+
+      setErrors({
+        ...errors,
+        email: emailError,
+        name: nameError,
+      });
+      setValues({ ...values, [name]: value });
     },
-    [setFormValid, setValues, setErrors]
+    [values, errors]
   );
+
+  const checkFormValidity = useCallback(() => {
+    const isEmailValid = validator.validate(values.email);
+    const isNameValid =
+      !values.name || /^[a-zA-Zа-яА-Я\s\-]+$/.test(values.name);
+
+    setFormValid(isEmailValid && isNameValid);
+  }, [values]);
+
+  useEffect(() => {
+    checkFormValidity();
+  }, [values, checkFormValidity]);
 
   return {
     values,
-    setValues,
-    setFormValid,
     errors,
     isFormValid,
-    onChange,
-    resetValidation,
+    onChange: handleInputChange,
+    setValues,
+    setFormValid,
   };
 }
 

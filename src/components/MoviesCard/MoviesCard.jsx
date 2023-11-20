@@ -1,7 +1,17 @@
 import React from "react";
 import "./MoviesCard.css";
+import saved from "../../images/saved.svg";
+import exit from "../../images/exit.svg";
+import { useLocation } from "react-router-dom";
 
-const MoviesCard = ({ onAddToUserList, card, onDelete, savedMovies }) => {
+const MoviesCard = ({
+  onAddToUserList,
+  card,
+  onDelete,
+  savedMovies,
+  isMobile,
+}) => {
+  const location = useLocation();
   const isLiked = savedMovies.some(
     (item) => Number(item.movieId) === card.movieId
   );
@@ -16,24 +26,34 @@ const MoviesCard = ({ onAddToUserList, card, onDelete, savedMovies }) => {
 
   return (
     <section className="movies-card">
-      {!isLiked ? (
+      {location.pathname === "/movies" ? (
+        !isLiked ? (
+          <button
+            className="movies-card__save-btn"
+            type="submit"
+            onClick={() => handleAddCard(card)}
+          >
+            Сохранить
+          </button>
+        ) : (
+          <button
+            className="movies-card__saved-btn"
+            type="submit"
+            onClick={() => handleDeleteCard(card)}
+          >
+            <img src={saved} alt="like icon" />
+          </button>
+        )
+      ) : null}
+      {location.pathname === "/saved-movies" ? (
         <button
-          className="movies-card__save-btn"
-          type="submit"
-          onClick={() => handleAddCard(card)}
-        >
-          Сохранить
-        </button>
-      ) : (
-        <button
-          className="movies-card__save-btn"
+          className="movies-card__delete-btn"
           type="submit"
           onClick={() => handleDeleteCard(card)}
         >
-          Удалить
+          <img src={exit} alt="delete icon" />
         </button>
-      )}
-
+      ) : null}
       <a href={`${card.trailerLink}`} target="_blank">
         <img src={card.image} alt={card.alt} className="movies-card__img" />
       </a>
