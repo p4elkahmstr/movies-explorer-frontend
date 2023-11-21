@@ -23,13 +23,7 @@ const SearchForm = ({ onChange, onSearch, value, isChecked, onCheck }) => {
           minLength="2"
           maxLength="40"
         />
-        <button
-          className="search-form__container-button"
-          type="submit"
-          // onClick={() => {
-          //   onSearch(value);
-          // }}
-        >
+        <button className="search-form__container-button" type="submit">
           <img
             src={find}
             alt="arrow"

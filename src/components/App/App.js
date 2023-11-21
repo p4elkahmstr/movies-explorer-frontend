@@ -31,6 +31,11 @@ import {
 import { getInitialMovies } from "../../utils/moviesApi";
 import { mapToArray } from "../../utils/mapToArray";
 import { useResize } from "../../hooks/useResize";
+import {
+  ADD_MOVIES_COUNT,
+  INITIAL_MOVIES_COUNT,
+  INITIAL_MOVIES_COUNT_FOR_MOBILE,
+} from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -38,8 +43,8 @@ function App() {
     localStorage?.getItem("token") ? true : false
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [renderedMovies, setRenderedMovies] = useState(8);
-  const [addMovies, setAddMovies] = useState(2);
+  const [renderedMovies, setRenderedMovies] = useState();
+  const [addMovies, setAddMovies] = useState(ADD_MOVIES_COUNT);
   const [query, setQuery] = useState("");
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isShortSavedMoves, setIsShortSavedMovies] = useState(false);
@@ -55,14 +60,14 @@ function App() {
 
   useEffect(() => {
     if (screen === "mobile") {
-      setRenderedMovies(5);
-      setAddMovies(2);
+      setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_MOBILE);
+      setAddMovies(ADD_MOVIES_COUNT);
     } else if (screen === "tablet") {
-      setRenderedMovies(8);
-      setAddMovies(2);
+      setRenderedMovies(INITIAL_MOVIES_COUNT);
+      setAddMovies(ADD_MOVIES_COUNT);
     } else {
-      setRenderedMovies(8);
-      setAddMovies(2);
+      setRenderedMovies(INITIAL_MOVIES_COUNT);
+      setAddMovies(ADD_MOVIES_COUNT);
     }
   }, [screen]);
 
@@ -78,6 +83,37 @@ function App() {
         .catch((e) => console.log(e));
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      getUserInfo()
+        .then((userInfo) => setCurrentUser(userInfo))
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const tokenCheck = () => {
+      if (!localStorage.getItem("token")) {
+        handleLogout();
+        return;
+      }
+      getUserInfo()
+        .then((data) => {
+          if (data) {
+            setLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    tokenCheck();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
+  }, [savedMovies]);
 
   function handleUpdateUserInfo(data) {
     setIsLoading(true);
@@ -145,14 +181,6 @@ function App() {
         setIsLoading(false);
       });
   }
-
-  useEffect(() => {
-    if (loggedIn) {
-      getUserInfo()
-        .then((userInfo) => setCurrentUser(userInfo))
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
 
   function handleLogout() {
     localStorage.clear();
@@ -236,29 +264,6 @@ function App() {
     );
     setSavedMovies(foundMoviesWithinSaved);
   }
-
-  useEffect(() => {
-    const tokenCheck = () => {
-      if (!localStorage.getItem("token")) {
-        handleLogout();
-        return;
-      }
-      getUserInfo()
-        .then((data) => {
-          if (data) {
-            setLoggedIn(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    tokenCheck();
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
-  }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
