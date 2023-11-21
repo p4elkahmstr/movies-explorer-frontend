@@ -191,7 +191,6 @@ function App() {
       } finally {
         setIsLoading(false);
       }
-      setIsLoading(true);
     }
     const moviesToMap = mapToArray(
       JSON.parse(localStorage.initialMovies).filter(
