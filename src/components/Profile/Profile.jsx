@@ -20,13 +20,10 @@ const Profile = ({
     errors,
     isFormValid,
     setFormValid,
-    resetValidation,
   } = useFormWithValidation({
     name: "",
     email: "",
   });
-
-  console.log(errors);
 
   useEffect(() => {
     setMessage("");

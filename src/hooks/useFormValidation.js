@@ -47,8 +47,9 @@ function useFormWithValidation() {
     const isEmailValid = validator.validate(values.email);
     const isNameValid =
       !values.name || /^[a-zA-Zа-яА-Я\s\-]+$/.test(values.name);
+    const isPasswordValid = values.password.length !== 0;
 
-    setFormValid(isEmailValid && isNameValid);
+    setFormValid(isEmailValid && isNameValid && isPasswordValid);
   }, [values]);
 
   const resetValidation = (isFormValid = false, values = {}, errors = {}) => {
