@@ -105,6 +105,8 @@
     color: #ba2323;;
     display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .login__form-input-error_active {

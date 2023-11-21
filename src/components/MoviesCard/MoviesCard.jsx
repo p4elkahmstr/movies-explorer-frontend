@@ -50,7 +50,11 @@ const MoviesCard = ({ onAddToUserList, card, onDelete, savedMovies }) => {
         </button>
       ) : null}
       <a href={`${card.trailerLink}`} target="_blank">
-        <img src={card.image} alt={card.alt} className="movies-card__img" />
+        <img
+          src={card.image}
+          alt={`Постер фильма ${card.nameRU.trim()}`}
+          className="movies-card__img"
+        />
       </a>
       <div className="movies-card__subtitle">
         <h2 className="movies-card__subtitle-title">{card.nameRU}</h2>

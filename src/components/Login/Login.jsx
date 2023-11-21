@@ -13,6 +13,12 @@ const Login = ({ handleLogin, onLoading, errorMessage, setMessage }) => {
     handleLogin(values);
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  }
+
   useEffect(() => {
     setMessage("");
   }, []);
@@ -46,6 +52,7 @@ const Login = ({ handleLogin, onLoading, errorMessage, setMessage }) => {
             onChange={handleInputChange}
             value={values.email || ""}
             disabled={onLoading ? true : false}
+            onKeyDown={handleKeyDown}
           />
           <span
             className={`login__form-input-error ${
@@ -70,6 +77,7 @@ const Login = ({ handleLogin, onLoading, errorMessage, setMessage }) => {
             onChange={handleInputChange}
             disabled={onLoading ? true : false}
             value={values.password || ""}
+            onKeyDown={handleKeyDown}
           />
           <span
             className={`login__form-input-error ${

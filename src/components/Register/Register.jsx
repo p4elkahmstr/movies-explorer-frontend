@@ -13,6 +13,12 @@ const Register = ({ handleRegister, onLoading, errorMessage, setMessage }) => {
     handleRegister(values);
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  }
+
   useEffect(() => {
     setMessage();
   }, []);
@@ -48,6 +54,7 @@ const Register = ({ handleRegister, onLoading, errorMessage, setMessage }) => {
             onChange={handleInputChange}
             value={values.name || ""}
             disabled={onLoading ? true : false}
+            onKeyDown={handleKeyDown}
           />
           <span
             className={`register__form-input-error ${
@@ -69,6 +76,7 @@ const Register = ({ handleRegister, onLoading, errorMessage, setMessage }) => {
             onChange={handleInputChange}
             value={values.email || ""}
             disabled={onLoading ? true : false}
+            onKeyDown={handleKeyDown}
           />
           <span
             className={`register__form-input-error ${
@@ -93,6 +101,7 @@ const Register = ({ handleRegister, onLoading, errorMessage, setMessage }) => {
             onChange={handleInputChange}
             value={values.password || ""}
             disabled={onLoading ? true : false}
+            onKeyDown={handleKeyDown}
           />
           <span
             className={`register__form-input-error ${

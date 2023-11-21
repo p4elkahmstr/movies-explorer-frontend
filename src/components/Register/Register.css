@@ -76,6 +76,7 @@
     color: #ba2323;;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .register__form-submit[disabled] {

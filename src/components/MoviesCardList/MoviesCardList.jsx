@@ -29,7 +29,7 @@ const MoviesCardList = ({
           <MoviesCard
             card={el}
             onAddToUserList={onAddToUserList}
-            key={el.movieId}
+            key={el.id || el._id}
             savedMovies={savedMovies}
             onDelete={onDelete}
           />

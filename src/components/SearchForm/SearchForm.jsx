@@ -27,6 +27,12 @@ const SearchForm = ({ onChange, onSearch, value, isChecked, onCheck }) => {
     });
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  }
+
   return (
     <form name="search-form" className="search-form" onSubmit={onSubmit}>
       <div className="search-form__container">
@@ -39,6 +45,7 @@ const SearchForm = ({ onChange, onSearch, value, isChecked, onCheck }) => {
           form="search-form"
           onChange={handleChange}
           required
+          onKeyDown={handleKeyDown}
         />
         <button className="search-form__container-button" type="submit">
           <img
