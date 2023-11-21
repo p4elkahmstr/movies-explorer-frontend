@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-const breakpointMobile = 768;
+import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../utils/constants";
 
 export const useResize = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
@@ -15,9 +15,9 @@ export const useResize = () => {
     };
   }, []);
   useEffect(() => {
-    if (width <= 480) {
+    if (width <= MOBILE_BREAKPOINT) {
       setScreen("mobile");
-    } else if (width <= 768) {
+    } else if (width <= TABLET_BREAKPOINT) {
       setScreen("tablet");
     } else {
       setScreen("full");
@@ -26,7 +26,6 @@ export const useResize = () => {
 
   return {
     width,
-    isMobile: width <= breakpointMobile,
     screen,
   };
 };

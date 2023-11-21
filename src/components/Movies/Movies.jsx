@@ -22,8 +22,7 @@ function Movies({
   useEffect(() => {
     const query = localStorage.getItem("query");
     if (query?.length > 0) {
-      console.log("useEffect query", query, query?.length);
-      // onChange(query);
+      onChange(query);
       onSearch(query);
     }
   }, []);

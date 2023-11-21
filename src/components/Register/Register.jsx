@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Register.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import useFormWithValidation from "../../hooks/useFormValidation";
 
-const Register = ({ handleRegister, onLoading, errorMessage }) => {
-  const { values, errors, isFormValid, onChange } = useFormWithValidation();
+const Register = ({ handleRegister, onLoading, errorMessage, setMessage }) => {
+  const { values, errors, isFormValid, handleInputChange } =
+    useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
     handleRegister(values);
   }
+
+  useEffect(() => {
+    setMessage();
+  }, []);
 
   return (
     <main>
@@ -40,7 +45,7 @@ const Register = ({ handleRegister, onLoading, errorMessage }) => {
             id="name"
             name="name"
             form="register"
-            onChange={onChange}
+            onChange={handleInputChange}
             value={values.name || ""}
             disabled={onLoading ? true : false}
           />
@@ -61,7 +66,7 @@ const Register = ({ handleRegister, onLoading, errorMessage }) => {
             required
             placeholder="Введите E-mail..."
             form="register"
-            onChange={onChange}
+            onChange={handleInputChange}
             value={values.email || ""}
             disabled={onLoading ? true : false}
           />
@@ -85,7 +90,7 @@ const Register = ({ handleRegister, onLoading, errorMessage }) => {
             minLength={2}
             maxLength={40}
             form="register"
-            onChange={onChange}
+            onChange={handleInputChange}
             value={values.password || ""}
             disabled={onLoading ? true : false}
           />
@@ -106,9 +111,9 @@ const Register = ({ handleRegister, onLoading, errorMessage }) => {
           <p className="register__form_error-message">{errorMessage}</p>
           <p className="register__form-subtitle">
             Уже зарегистрированы?
-            <a href="/signin" className="register__form-span">
+            <Link to="/signin" className="register__form-span">
               Войти
-            </a>
+            </Link>
           </p>
         </form>
       </section>

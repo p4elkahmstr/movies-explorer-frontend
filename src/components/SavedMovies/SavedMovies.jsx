@@ -5,6 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 
 const SavedMovies = ({
   cards,
+  setCards,
   value,
   onChange,
   onSearch,
@@ -16,7 +17,10 @@ const SavedMovies = ({
   useEffect(() => {
     onChange("");
     onCheck(false);
+    const localCards = JSON.parse(localStorage.getItem("savedMovies"));
+    localCards && setCards(localCards);
   }, []);
+
   return (
     <main>
       <section className="saved-movies" id="saved-movies">

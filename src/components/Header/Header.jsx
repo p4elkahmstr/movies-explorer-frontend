@@ -10,7 +10,6 @@ const Header = ({ auth }) => {
 
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-    console.log(isBurgerMenuOpen);
   };
 
   return (

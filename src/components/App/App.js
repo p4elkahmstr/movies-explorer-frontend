@@ -33,8 +33,10 @@ import { mapToArray } from "../../utils/mapToArray";
 import { useResize } from "../../hooks/useResize";
 import {
   ADD_MOVIES_COUNT,
+  ADD_MOVIES_COUNT_FOR_MOBILE_AND_TABLET,
   INITIAL_MOVIES_COUNT,
   INITIAL_MOVIES_COUNT_FOR_MOBILE,
+  INITIAL_MOVIES_COUNT_FOR_TABLET,
 } from "../../utils/constants";
 
 function App() {
@@ -61,10 +63,10 @@ function App() {
   useEffect(() => {
     if (screen === "mobile") {
       setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_MOBILE);
-      setAddMovies(ADD_MOVIES_COUNT);
+      setAddMovies(ADD_MOVIES_COUNT_FOR_MOBILE_AND_TABLET);
     } else if (screen === "tablet") {
-      setRenderedMovies(INITIAL_MOVIES_COUNT);
-      setAddMovies(ADD_MOVIES_COUNT);
+      setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_TABLET);
+      setAddMovies(ADD_MOVIES_COUNT_FOR_MOBILE_AND_TABLET);
     } else {
       setRenderedMovies(INITIAL_MOVIES_COUNT);
       setAddMovies(ADD_MOVIES_COUNT);
@@ -76,11 +78,6 @@ function App() {
       if (localStorage.checkbox) {
         setIsShortMovies(JSON.parse(localStorage.checkbox));
       }
-      getUserMovies()
-        .then((userMovies) => {
-          setSavedMovies(userMovies);
-        })
-        .catch((e) => console.log(e));
     }
   }, [loggedIn]);
 
@@ -111,10 +108,6 @@ function App() {
     tokenCheck();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
-  }, [savedMovies]);
-
   function handleUpdateUserInfo(data) {
     setIsLoading(true);
     setUserInfo(data)
@@ -132,13 +125,7 @@ function App() {
   }
 
   function handleShowMoreMovies() {
-    if (screen === "mobile") {
-      setRenderedMovies(renderedMovies + addMovies);
-    } else if (screen === "tablet") {
-      setRenderedMovies(renderedMovies + addMovies);
-    } else {
-      setRenderedMovies(renderedMovies + addMovies);
-    }
+    setRenderedMovies(renderedMovies + addMovies);
   }
 
   function handleRegister({ name, email, password }) {
@@ -169,13 +156,14 @@ function App() {
         navigate("/movies");
       })
       .catch((e) => {
-        console.error(e);
-        if (e.status === 401) {
+        console.log(e);
+        if (e === 401) {
           setMessage(
             "Некорректные данные, пожалуйста, проверьте email и пароль"
           );
+        } else {
+          setMessage("Что-то пошло не так, попробуйте зайти позднее");
         }
-        setMessage("Что-то пошло не так, попробуйте зайти позднее");
       })
       .finally(() => {
         setIsLoading(false);
@@ -220,6 +208,15 @@ function App() {
         setIsLoading(false);
       }
     }
+    if (!localStorage.savedMovies) {
+      try {
+        const userSavedMovies = await getUserMovies();
+        localStorage.setItem("savedMovies", JSON.stringify(userSavedMovies));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     const moviesToMap = mapToArray(
       JSON.parse(localStorage.initialMovies).filter(
         (movie) =>
@@ -227,6 +224,15 @@ function App() {
           movie.nameRU.toLowerCase().includes(searchWord.toLowerCase())
       )
     );
+
+    if (screen === "mobile") {
+      setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_MOBILE);
+    } else if (screen === "tablet") {
+      setRenderedMovies(INITIAL_MOVIES_COUNT);
+    } else {
+      setRenderedMovies(INITIAL_MOVIES_COUNT);
+    }
+
     setMovies(moviesToMap);
     setDidUserSearch(true);
   }
@@ -236,6 +242,7 @@ function App() {
       .then((card) => {
         const updateSavedMovies = [...savedMovies, card];
         setSavedMovies(updateSavedMovies);
+        localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -248,10 +255,11 @@ function App() {
     );
     deleteMovie(savedMovie._id)
       .then(() => {
-        const updateSavedMovie = savedMovies.filter(
+        const updateSavedMovies = savedMovies.filter(
           (card) => card._id !== savedMovie._id
         );
-        setSavedMovies(updateSavedMovie);
+        setSavedMovies(updateSavedMovies);
+        localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
       })
       .catch((err) => console.log(err));
   }
@@ -282,6 +290,7 @@ function App() {
                   handleLogin={handleLogin}
                   onLoading={isLoading}
                   errorMessage={message}
+                  setMessage={setMessage}
                 />
               )
             }
@@ -296,6 +305,7 @@ function App() {
                   handleRegister={handleRegister}
                   onLoading={isLoading}
                   errorMessage={message}
+                  setMessage={setMessage}
                 />
               )
             }
@@ -327,6 +337,7 @@ function App() {
               element={
                 <SavedMovies
                   cards={savedMovies}
+                  setCards={setSavedMovies}
                   value={query}
                   onChange={setQuery}
                   onSearch={handleSearchWithinSaved}
@@ -346,6 +357,7 @@ function App() {
                   handleShowMoreMovies={handleShowMoreMovies}
                   onUpdateUserInfo={handleUpdateUserInfo}
                   message={message}
+                  setMessage={setMessage}
                 />
               }
             />

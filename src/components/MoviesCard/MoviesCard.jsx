@@ -5,11 +5,12 @@ import exit from "../../images/exit.svg";
 import { useLocation } from "react-router-dom";
 
 const MoviesCard = ({ onAddToUserList, card, onDelete, savedMovies }) => {
-  const location = useLocation();
-  const isLiked = savedMovies.some(
-    (item) => Number(item.movieId) === card.movieId
-  );
+  const localSavedMovies = JSON.parse(localStorage.savedMovies);
 
+  const location = useLocation();
+  const isLiked = localSavedMovies
+    ? localSavedMovies.some((item) => Number(item.movieId) === card.movieId)
+    : false;
   function handleAddCard(card) {
     onAddToUserList(card);
   }

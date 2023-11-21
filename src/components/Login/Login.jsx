@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Login.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import useFormWithValidation from "../../hooks/useFormValidation";
 
-const Login = ({ handleLogin, onLoading, errorMessage }) => {
-  const { values, errors, isFormValid, onChange } = useFormWithValidation();
+const Login = ({ handleLogin, onLoading, errorMessage, setMessage }) => {
+  const { values, errors, isFormValid, handleInputChange } =
+    useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
     handleLogin(values);
   }
+
+  useEffect(() => {
+    setMessage("");
+  }, []);
 
   return (
     <main>
@@ -38,7 +43,7 @@ const Login = ({ handleLogin, onLoading, errorMessage }) => {
             form="login"
             required
             placeholder="Введите E-mail..."
-            onChange={onChange}
+            onChange={handleInputChange}
             value={values.email || ""}
             disabled={onLoading ? true : false}
           />
@@ -62,7 +67,7 @@ const Login = ({ handleLogin, onLoading, errorMessage }) => {
             placeholder="Введите пароль..."
             minLength={2}
             maxLength={40}
-            onChange={onChange}
+            onChange={handleInputChange}
             disabled={onLoading ? true : false}
             value={values.password || ""}
           />
@@ -83,9 +88,9 @@ const Login = ({ handleLogin, onLoading, errorMessage }) => {
           <p className="login__form_error-message">{errorMessage}</p>
           <p className="login__form-subtitle">
             Ещё не зарегистрированы?
-            <a href="/signup" className="login__form-span">
+            <Link to="/signup" className="login__form-span">
               Регистрация
-            </a>
+            </Link>
           </p>
         </form>
       </section>

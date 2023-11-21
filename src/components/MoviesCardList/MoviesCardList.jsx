@@ -14,15 +14,10 @@ const MoviesCardList = ({
   isChecked,
 }) => {
   const location = useLocation();
-  useEffect(() => {
-    console.log("useEffect isChecked", isChecked);
-  }, [isChecked]);
-  console.log("cards", cards);
 
   const movies = isChecked
     ? cards.filter((el) => el.duration < 41)
     : [...cards];
-  // console.log("movies", movies);
   if (didUserSearch && cards.length === 0) {
     return <p className="card-list__message">Ничего не найдено</p>;
   }

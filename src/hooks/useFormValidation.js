@@ -2,7 +2,12 @@ import { useCallback, useState, useEffect } from "react";
 import validator from "email-validator";
 
 function useFormWithValidation() {
-  const [values, setValues] = useState({ email: "", password: "", name: "" });
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    name: "",
+    search: "",
+  });
   const [errors, setErrors] = useState({});
   const [isFormValid, setFormValid] = useState(false);
 
@@ -12,6 +17,7 @@ function useFormWithValidation() {
 
       let emailError = "";
       let nameError = "";
+      let searchError = "";
 
       if (name === "name" && !/^[a-zA-Zа-яА-Я\s\-]+$/.test(value)) {
         nameError =
@@ -22,10 +28,15 @@ function useFormWithValidation() {
         emailError = "Необходимо указать e-mail в формате name@domain.zone";
       }
 
+      if (name === "search" && value.length === 0) {
+        searchError = "Нужно ввести ключевое слово";
+      }
+
       setErrors({
         ...errors,
         email: emailError,
         name: nameError,
+        search: searchError,
       });
       setValues({ ...values, [name]: value });
     },
@@ -40,6 +51,12 @@ function useFormWithValidation() {
     setFormValid(isEmailValid && isNameValid);
   }, [values]);
 
+  const resetValidation = (isFormValid = false, values = {}, errors = {}) => {
+    setFormValid(isFormValid);
+    setValues({ values });
+    setErrors(errors);
+  };
+
   useEffect(() => {
     checkFormValidity();
   }, [values, checkFormValidity]);
@@ -48,9 +65,10 @@ function useFormWithValidation() {
     values,
     errors,
     isFormValid,
-    onChange: handleInputChange,
+    handleInputChange,
     setValues,
     setFormValid,
+    resetValidation,
   };
 }
 

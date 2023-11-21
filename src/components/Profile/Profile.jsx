@@ -2,16 +2,35 @@ import React, { useContext, useEffect } from "react";
 import "./Profile.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import useFormWithValidation from "../../hooks/useFormValidation";
+import { Link } from "react-router-dom";
 
-const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
+const Profile = ({
+  handleLogout,
+  onUpdateUserInfo,
+  message,
+  setMessage,
+  loading,
+}) => {
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
 
-  const { values, setValues, onChange, errors, isFormValid, setFormValid } =
-    useFormWithValidation({
-      name: "",
-      email: "",
-    });
+  const {
+    values,
+    setValues,
+    handleInputChange,
+    errors,
+    isFormValid,
+    setFormValid,
+    resetValidation,
+  } = useFormWithValidation({
+    name: "",
+    email: "",
+  });
+
+  console.log(errors);
+
+  useEffect(() => {
+    setMessage("");
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,8 +39,6 @@ const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
       email: values.email,
     });
   }
-
-  console.log(values);
 
   useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
@@ -52,7 +69,7 @@ const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
               name="name"
               id="name-input"
               value={values.name || ""}
-              onChange={onChange}
+              onChange={handleInputChange}
               placeholder="Имя пользователя"
             />
             <p className="profile__input-error">{errors.name}</p>
@@ -68,7 +85,7 @@ const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
               name="email"
               id="email-input"
               value={values.email || ""}
-              onChange={onChange}
+              onChange={handleInputChange}
               placeholder="Email"
             />
             <p className="profile__input-error">{errors.email}</p>
@@ -83,9 +100,13 @@ const Profile = ({ handleLogout, onUpdateUserInfo, message, loading }) => {
           >
             Редактировать
           </button>
-          <a href="/signin" className="profile__logout" onClick={handleLogout}>
+          <Link
+            href="/signin"
+            className="profile__logout"
+            onClick={handleLogout}
+          >
             Выйти из аккаунта
-          </a>
+          </Link>
         </form>
       </div>
     </section>
