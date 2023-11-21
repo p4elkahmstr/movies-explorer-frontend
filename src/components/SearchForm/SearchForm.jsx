@@ -1,4 +1,3 @@
-import React from "react";
 import "./SearchForm.css";
 import find from "../../images/find.svg";
 
@@ -7,8 +6,13 @@ const SearchForm = ({ onChange, onSearch, value, isChecked, onCheck }) => {
     onChange(e.target.value);
   }
 
+  function onSubmit(e) {
+    e.preventDefault();
+    onSearch(value);
+  }
+
   return (
-    <form className="search-form" onSubmit={onSearch}>
+    <form className="search-form" onSubmit={onSubmit}>
       <div className="search-form__container">
         <input
           className="search-form__container-input"
@@ -21,8 +25,10 @@ const SearchForm = ({ onChange, onSearch, value, isChecked, onCheck }) => {
         />
         <button
           className="search-form__container-button"
-          type="button"
-          onClick={onSearch}
+          type="submit"
+          // onClick={() => {
+          //   onSearch(value);
+          // }}
         >
           <img
             src={find}

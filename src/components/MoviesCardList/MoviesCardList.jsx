@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
@@ -11,10 +11,18 @@ const MoviesCardList = ({
   onAddToUserList,
   savedMovies,
   onDelete,
-  isMobile,
+  isChecked,
 }) => {
   const location = useLocation();
+  useEffect(() => {
+    console.log("useEffect isChecked", isChecked);
+  }, [isChecked]);
+  console.log("cards", cards);
 
+  const movies = isChecked
+    ? cards.filter((el) => el.duration < 41)
+    : [...cards];
+  // console.log("movies", movies);
   if (didUserSearch && cards.length === 0) {
     return <p className="card-list__message">Ничего не найдено</p>;
   }
@@ -22,18 +30,15 @@ const MoviesCardList = ({
   return (
     <>
       <section className="movies-card-list">
-        {cards
-          .map((el) => (
-            <MoviesCard
-              card={el}
-              onAddToUserList={onAddToUserList}
-              key={el.movieId}
-              savedMovies={savedMovies}
-              onDelete={onDelete}
-              isMobile={isMobile}
-            />
-          ))
-          .slice(0, renderedMovies)}
+        {movies.slice(0, renderedMovies).map((el) => (
+          <MoviesCard
+            card={el}
+            onAddToUserList={onAddToUserList}
+            key={el.movieId}
+            savedMovies={savedMovies}
+            onDelete={onDelete}
+          />
+        ))}
       </section>
       {location.pathname === "/movies" && cards.length > renderedMovies && (
         <button

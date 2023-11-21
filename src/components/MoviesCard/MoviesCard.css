@@ -45,7 +45,29 @@
     color: #ffffff;
 }
 
+.movies-card__saved-btn {
+    position: absolute;
+    height: 21px;
+    top: 14px;
+    right: 14px;
+    border: none;
+    border-radius: 30px;
+    background-color: transparent;
+    z-index: 1;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 0.9;
+    text-align: center;
+    color: #ffffff;
+}
+
 .movies-card__save-btn:hover {
+    opacity: 0.8;
+}
+
+.movies-card__saved-btn:hover {
     opacity: 0.8;
 }
 

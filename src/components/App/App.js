@@ -3,6 +3,7 @@ import {
   Navigate,
   Route,
   Routes,
+  useLocation,
   useNavigate,
 } from "react-router-dom";
 import Footer from "../Footer/Footer";
@@ -16,7 +17,7 @@ import NotFoundError from "../NotFoundError/NotFoundError";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import {
   addMovie,
@@ -29,6 +30,7 @@ import {
 } from "../../utils/mainApi";
 import { getInitialMovies } from "../../utils/moviesApi";
 import { mapToArray } from "../../utils/mapToArray";
+import { useResize } from "../../hooks/useResize";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -36,29 +38,46 @@ function App() {
     localStorage?.getItem("token") ? true : false
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [renderedMovies, setRenderedMovies] = useState(7);
+  const [renderedMovies, setRenderedMovies] = useState(8);
+  const [addMovies, setAddMovies] = useState(2);
   const [query, setQuery] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isShortMovies, setIsShortMovies] = useState(false);
+  const [isShortSavedMoves, setIsShortSavedMovies] = useState(false);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState("");
   const [didUserSeach, setDidUserSearch] = useState(false);
 
+  const { screen } = useResize();
+
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (screen === "mobile") {
+      setRenderedMovies(5);
+      setAddMovies(2);
+    } else if (screen === "tablet") {
+      setRenderedMovies(8);
+      setAddMovies(2);
+    } else {
+      setRenderedMovies(8);
+      setAddMovies(2);
+    }
+  }, [screen]);
 
   useEffect(() => {
     if (loggedIn) {
       if (localStorage.checkbox) {
-        setIsChecked(JSON.parse(localStorage.checkbox));
+        setIsShortMovies(JSON.parse(localStorage.checkbox));
       }
       getUserMovies()
         .then((userMovies) => {
-          showByCheckboxStateInSaved(userMovies);
+          setSavedMovies(userMovies);
         })
         .catch((e) => console.log(e));
     }
-  }, [loggedIn, isChecked]);
+  }, [loggedIn]);
 
   function handleUpdateUserInfo(data) {
     setIsLoading(true);
@@ -77,10 +96,12 @@ function App() {
   }
 
   function handleShowMoreMovies() {
-    if (!isMobile) {
-      setRenderedMovies(renderedMovies + 5);
+    if (screen === "mobile") {
+      setRenderedMovies(renderedMovies + addMovies);
+    } else if (screen === "tablet") {
+      setRenderedMovies(renderedMovies + addMovies);
     } else {
-      setRenderedMovies(renderedMovies + 7);
+      setRenderedMovies(renderedMovies + addMovies);
     }
   }
 
@@ -143,54 +164,43 @@ function App() {
     navigate("/");
   }
 
-  function handleToggleCheck() {
-    if (!isChecked) {
-      setIsChecked(true);
-      localStorage.setItem("checkbox", JSON.stringify(true));
+  function handleToggleCheck(checked) {
+    if (location.pathname === "/movies") {
+      setIsShortMovies(checked);
+      localStorage.setItem("checkbox", checked);
+      handleSearch(query);
     } else {
-      setIsChecked(false);
-      localStorage.setItem("checkbox", JSON.stringify(false));
+      setIsShortSavedMovies(checked);
+      handleSearchWithinSaved(query);
     }
   }
 
-  const showByCheckboxState = (moviesArray) => {
-    if (!isChecked) {
-      setMovies(moviesArray);
-    } else {
-      setMovies(moviesArray.filter((movie) => movie.duration < 41));
+  async function handleSearch(searchWord) {
+    if (!query && !searchWord) return;
+    if (location.pathname === "/movies") {
+      localStorage.setItem("query", searchWord);
     }
-  };
-
-  const showByCheckboxStateInSaved = (moviesArray) => {
-    if (!isChecked) {
-      setSavedMovies(moviesArray);
-    } else {
-      setSavedMovies(moviesArray.filter((movie) => movie.duration < 41));
-    }
-  };
-
-  async function handleSearch(e, searchWord) {
-    e.preventDefault();
-    if (!query) return;
-    setIsLoading(true);
-    localStorage.setItem("query", query);
     setQuery(searchWord);
     if (!localStorage.initialMovies) {
-      await getInitialMovies()
-        .then((movies) => {
-          localStorage.setItem("initialMovies", JSON.stringify(movies));
-        })
-        .catch((e) => console.log(e));
+      setIsLoading(true);
+      try {
+        const movies = await getInitialMovies();
+        localStorage.setItem("initialMovies", JSON.stringify(movies));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+      setIsLoading(true);
     }
     const moviesToMap = mapToArray(
       JSON.parse(localStorage.initialMovies).filter(
         (movie) =>
-          movie.nameEN.toLowerCase().includes(query.toLowerCase()) ||
-          movie.nameRU.toLowerCase().includes(query.toLowerCase())
+          movie.nameEN.toLowerCase().includes(searchWord.toLowerCase()) ||
+          movie.nameRU.toLowerCase().includes(searchWord.toLowerCase())
       )
     );
-    showByCheckboxState(moviesToMap);
-    setTimeout(setIsLoading(false), 1000);
+    setMovies(moviesToMap);
     setDidUserSearch(true);
   }
 
@@ -219,22 +229,19 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  function handleSearchWithinSaved(e) {
-    e.preventDefault();
-    if (!query) return;
+  function handleSearchWithinSaved(searchWord) {
     const foundMoviesWithinSaved = savedMovies.filter(
       (movie) =>
-        movie.nameEN.toLowerCase().includes(query.toLowerCase()) ||
-        movie.nameRU.toLowerCase().includes(query.toLowerCase())
+        movie.nameEN.toLowerCase().includes(searchWord.toLowerCase()) ||
+        movie.nameRU.toLowerCase().includes(searchWord.toLowerCase())
     );
-    showByCheckboxStateInSaved(foundMoviesWithinSaved);
-    setQuery("");
+    setSavedMovies(foundMoviesWithinSaved);
   }
 
   useEffect(() => {
     const tokenCheck = () => {
       if (!localStorage.getItem("token")) {
-        navigate("/");
+        handleLogout();
         return;
       }
       getUserInfo()
@@ -245,7 +252,6 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-          setLoggedIn(false);
         });
     };
     tokenCheck();
@@ -254,8 +260,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
   }, [savedMovies]);
-
-  console.log(savedMovies);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -301,7 +305,7 @@ function App() {
                   value={query}
                   onChange={setQuery}
                   onSearch={handleSearch}
-                  isChecked={isChecked}
+                  isChecked={isShortMovies}
                   onAddToUserList={handleAddToUserList}
                   onCheck={handleToggleCheck}
                   renderedMovies={renderedMovies}
@@ -326,8 +330,7 @@ function App() {
                   onCheck={handleToggleCheck}
                   savedMovies={savedMovies}
                   loading={isLoading}
-                  isChecked={isChecked}
-                  isMobile={isMobile}
+                  isChecked={isShortSavedMoves}
                 />
               }
             />

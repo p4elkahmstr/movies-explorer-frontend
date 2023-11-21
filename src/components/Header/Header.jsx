@@ -22,15 +22,15 @@ const Header = ({ auth }) => {
       {auth ? (
         <>
           <div className="header__navigation">
-            <a href="movies" className="header__navigation-button">
+            <Link to="/movies" className="header__navigation-button">
               Фильмы
-            </a>
-            <a
-              href="saved-movies"
+            </Link>
+            <Link
+              to="/saved-movies"
               className="header__navigation-button header__saved-movies"
             >
               Сохранённые фильмы
-            </a>
+            </Link>
           </div>
           <img
             className="header__burger"
@@ -39,9 +39,9 @@ const Header = ({ auth }) => {
             onClick={handleBurgerMenu}
           />
           <div className="h">
-            <a className="header__button" href="/profile">
+            <Link className="header__button" to="/profile">
               Аккаунт
-            </a>
+            </Link>
           </div>
           <Navigation
             isOpen={isBurgerMenuOpen}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SavedMovies.css";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
@@ -12,8 +12,11 @@ const SavedMovies = ({
   onCheck,
   onDelete,
   savedMovies,
-  isMobile,
 }) => {
+  useEffect(() => {
+    onChange("");
+    onCheck(false);
+  }, []);
   return (
     <main>
       <section className="saved-movies" id="saved-movies">
@@ -28,7 +31,7 @@ const SavedMovies = ({
           cards={cards}
           onDelete={onDelete}
           savedMovies={savedMovies}
-          isMobile={isMobile}
+          isChecked={isChecked}
         />
       </section>
     </main>

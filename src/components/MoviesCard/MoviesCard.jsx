@@ -4,13 +4,7 @@ import saved from "../../images/saved.svg";
 import exit from "../../images/exit.svg";
 import { useLocation } from "react-router-dom";
 
-const MoviesCard = ({
-  onAddToUserList,
-  card,
-  onDelete,
-  savedMovies,
-  isMobile,
-}) => {
+const MoviesCard = ({ onAddToUserList, card, onDelete, savedMovies }) => {
   const location = useLocation();
   const isLiked = savedMovies.some(
     (item) => Number(item.movieId) === card.movieId

@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
-import { useLocation } from "react-router-dom";
 
 function Movies({
   value,
@@ -20,6 +19,15 @@ function Movies({
   savedMovies,
   loading,
 }) {
+  useEffect(() => {
+    const query = localStorage.getItem("query");
+    if (query?.length > 0) {
+      console.log("useEffect query", query, query?.length);
+      // onChange(query);
+      onSearch(query);
+    }
+  }, []);
+
   return (
     <main>
       <section className="movies" id="movies">
@@ -41,6 +49,7 @@ function Movies({
             cards={cards}
             didUserSearch={didUserSearch}
             savedMovies={savedMovies}
+            isChecked={isChecked}
           />
         )}
       </section>
