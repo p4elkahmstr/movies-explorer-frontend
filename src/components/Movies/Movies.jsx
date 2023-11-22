@@ -1,20 +1,61 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
-const Movies = () => {
+function Movies({
+  value,
+  onCheck,
+  onChange,
+  isChecked,
+  onSearch,
+  renderedMovies,
+  message,
+  showMoreMovies,
+  cards,
+  onAddToUserList,
+  onDelete,
+  didUserSearch,
+  savedMovies,
+  loading,
+}) {
+  useEffect(() => {
+    const query = localStorage.getItem("query");
+    if (query?.length > 0) {
+      onChange(query);
+      onSearch(query);
+    }
+  }, []);
+
   return (
     <main>
       <section className="movies" id="movies">
-        <SearchForm />
-        <MoviesCardList />
-        <button className="movies__more-btn" type="button">
-          Ещё
-        </button>
+        <SearchForm
+          value={value}
+          onChange={onChange}
+          onSearch={onSearch}
+          onCheck={onCheck}
+          isChecked={isChecked}
+          message={message}
+        />
+        {loading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            renderedMovies={renderedMovies}
+            onAddToUserList={onAddToUserList}
+            onDelete={onDelete}
+            showMoreMovies={showMoreMovies}
+            cards={cards}
+            didUserSearch={didUserSearch}
+            savedMovies={savedMovies}
+            isChecked={isChecked}
+          />
+        )}
       </section>
     </main>
   );
-};
+}
 
 export default Movies;

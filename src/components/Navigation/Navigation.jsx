@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navigation.css";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ isOpen, onClose }) => {
   return (
@@ -15,22 +16,22 @@ const Navigation = ({ isOpen, onClose }) => {
             onClick={onClose}
           />
           <div className="navigation__links">
-            <a className="navigation__links-link" href="/">
+            <Link className="navigation__links-link" to="/">
               Главная
-            </a>
-            <a
+            </Link>
+            <Link
               className="navigation__links-link navigation__links-link_active"
-              href="movies"
+              to="movies"
             >
               Фильмы
-            </a>
-            <a className="navigation__links-link" href="saved-movies">
+            </Link>
+            <Link className="navigation__links-link" to="saved-movies">
               Сохранённые фильмы
-            </a>
+            </Link>
           </div>
-          <a href="profile" className="navigation__links-button">
+          <Link to="profile" className="navigation__links-button">
             Аккаунт
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

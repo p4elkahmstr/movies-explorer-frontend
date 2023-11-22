@@ -65,6 +65,20 @@ display: inline-block;
     padding-left: 46px;
 }
 
+.search__form-input-error {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.21;
+    margin-bottom: 20px;
+}
+
+.search__form-input-error_active {
+    color: #EE3465;
+}
+
 .search-form__checkbox-inner::before {
     display: block;
     content: "";
@@ -76,6 +90,10 @@ display: inline-block;
     border-radius: 20px;
     background-color: #343434;
     transition: background-color .3s;
+}
+
+.search-form__checkbox-inner:hover {
+    cursor: pointer;
 }
 
 .search-form__checkbox-inner::after {

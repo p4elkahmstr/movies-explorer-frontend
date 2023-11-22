@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import logo from "../../images/logo.svg";
 import "./Header.css";
 import burger from "../../images/burger.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-const Header = () => {
-  const [auth, setAuth] = useState(true);
+const Header = ({ auth }) => {
+  const location = useLocation();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-    console.log(isBurgerMenuOpen);
   };
 
   return (
@@ -23,15 +22,26 @@ const Header = () => {
       {auth ? (
         <>
           <div className="header__navigation">
-            <a href="movies" className="header__navigation-button">
+            <NavLink
+              to="/movies"
+              className={
+                location.pathname === "/movies"
+                  ? "header__navigation-button_active"
+                  : "header__navigation-button"
+              }
+            >
               Фильмы
-            </a>
-            <a
-              href="saved-movies"
-              className="header__navigation-button header__saved-movies"
+            </NavLink>
+            <NavLink
+              to="/saved-movies"
+              className={
+                location.pathname === "/saved-movies"
+                  ? "header__navigation-button_active header__saved-movies"
+                  : "header__navigation-button header__saved-movies"
+              }
             >
               Сохранённые фильмы
-            </a>
+            </NavLink>
           </div>
           <img
             className="header__burger"
@@ -40,9 +50,9 @@ const Header = () => {
             onClick={handleBurgerMenu}
           />
           <div className="h">
-            <a className="header__button" href="/profile">
+            <Link className="header__button" to="/profile">
               Аккаунт
-            </a>
+            </Link>
           </div>
           <Navigation
             isOpen={isBurgerMenuOpen}
@@ -52,12 +62,16 @@ const Header = () => {
       ) : (
         <>
           <div className="header__auth">
-            <button className="header__auth_signup" type="submit">
-              Регистрация
-            </button>
-            <button className="header__auth_signin" type="submit">
-              Войти
-            </button>
+            <Link to="/signup">
+              <button className="header__auth_signup" type="submit">
+                Регистрация
+              </button>
+            </Link>
+            <Link to="/signin">
+              <button className="header__auth_signin" type="submit">
+                Войти
+              </button>
+            </Link>
           </div>
         </>
       )}

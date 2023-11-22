@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SavedMovies.css";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
 import SearchForm from "../SearchForm/SearchForm";
 
-const SavedMovies = () => {
+const SavedMovies = ({
+  cards,
+  setCards,
+  value,
+  onChange,
+  onSearch,
+  isChecked,
+  onCheck,
+  onDelete,
+  savedMovies,
+  message,
+}) => {
+  useEffect(() => {
+    onChange("");
+    onCheck(false);
+    const localCards = JSON.parse(localStorage.getItem("savedMovies"));
+    localCards && setCards(localCards);
+  }, []);
+
   return (
     <main>
       <section className="saved-movies" id="saved-movies">
-        <SearchForm />
-        <MoviesCardList />
+        <SearchForm
+          value={value}
+          onChange={onChange}
+          onSearch={onSearch}
+          isChecked={isChecked}
+          onCheck={onCheck}
+          message={message}
+        />
+        <MoviesCardList
+          cards={cards}
+          onDelete={onDelete}
+          savedMovies={savedMovies}
+          isChecked={isChecked}
+        />
       </section>
     </main>
   );

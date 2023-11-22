@@ -68,6 +68,7 @@
 
 .navigation__close {
     background-image: url(../../images/exit.svg);
+    background-repeat: no-repeat;
     width: 25px;
     height: 25px;
     background-color: inherit;
