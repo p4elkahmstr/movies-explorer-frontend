@@ -180,7 +180,9 @@
         font-size: 12px;
         line-height: 1.21;
     }
+}
 
+@media (max-width: 767px) and (min-width: 320px) {
     .movies-card__delete-btn {
         opacity: 1;
     }
