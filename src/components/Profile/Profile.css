@@ -137,6 +137,13 @@
         margin-bottom: 40px;
         margin-left: calc(30px + (179 - 30) * (100vw - 320px) / (767 - 320));
         margin-right: calc(30px + (179 - 30) * (100vw - 320px) / (767 - 320));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile__content {
+        width: 260px;
     }
 
     .profile__header {
