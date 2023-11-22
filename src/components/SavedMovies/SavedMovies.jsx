@@ -13,6 +13,7 @@ const SavedMovies = ({
   onCheck,
   onDelete,
   savedMovies,
+  message,
 }) => {
   useEffect(() => {
     onChange("");
@@ -30,6 +31,7 @@ const SavedMovies = ({
           onSearch={onSearch}
           isChecked={isChecked}
           onCheck={onCheck}
+          message={message}
         />
         <MoviesCardList
           cards={cards}

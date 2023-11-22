@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import logo from "../../images/logo.svg";
 import "./Header.css";
 import burger from "../../images/burger.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
 const Header = ({ auth }) => {
+  const location = useLocation();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const handleBurgerMenu = () => {
@@ -21,15 +22,26 @@ const Header = ({ auth }) => {
       {auth ? (
         <>
           <div className="header__navigation">
-            <Link to="/movies" className="header__navigation-button">
+            <NavLink
+              to="/movies"
+              className={
+                location.pathname === "/movies"
+                  ? "header__navigation-button_active"
+                  : "header__navigation-button"
+              }
+            >
               Фильмы
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/saved-movies"
-              className="header__navigation-button header__saved-movies"
+              className={
+                location.pathname === "/saved-movies"
+                  ? "header__navigation-button_active header__saved-movies"
+                  : "header__navigation-button header__saved-movies"
+              }
             >
               Сохранённые фильмы
-            </Link>
+            </NavLink>
           </div>
           <img
             className="header__burger"

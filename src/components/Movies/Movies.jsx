@@ -11,6 +11,7 @@ function Movies({
   isChecked,
   onSearch,
   renderedMovies,
+  message,
   showMoreMovies,
   cards,
   onAddToUserList,
@@ -36,6 +37,7 @@ function Movies({
           onSearch={onSearch}
           onCheck={onCheck}
           isChecked={isChecked}
+          message={message}
         />
         {loading ? (
           <Preloader />

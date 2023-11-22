@@ -32,7 +32,8 @@ import { mapToArray } from "../../utils/mapToArray";
 import { useResize } from "../../hooks/useResize";
 import {
   ADD_MOVIES_COUNT,
-  ADD_MOVIES_COUNT_FOR_MOBILE_AND_TABLET,
+  ADD_MOVIES_COUNT_FOR_MOBILE,
+  ADD_MOVIES_COUNT_FOR_TABLET,
   INITIAL_MOVIES_COUNT,
   INITIAL_MOVIES_COUNT_FOR_MOBILE,
   INITIAL_MOVIES_COUNT_FOR_TABLET,
@@ -45,7 +46,7 @@ function App() {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [renderedMovies, setRenderedMovies] = useState();
-  const [addMovies, setAddMovies] = useState(ADD_MOVIES_COUNT);
+  const [addMovies, setAddMovies] = useState();
   const [query, setQuery] = useState("");
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isShortSavedMoves, setIsShortSavedMovies] = useState(false);
@@ -59,18 +60,22 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(screen);
+
   useEffect(() => {
     if (screen === "mobile") {
       setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_MOBILE);
-      setAddMovies(ADD_MOVIES_COUNT_FOR_MOBILE_AND_TABLET);
-    } else if (screen === "tablet") {
+      setAddMovies(ADD_MOVIES_COUNT_FOR_MOBILE);
+    }
+    if (screen === "tablet") {
       setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_TABLET);
-      setAddMovies(ADD_MOVIES_COUNT_FOR_MOBILE_AND_TABLET);
-    } else {
+      setAddMovies(ADD_MOVIES_COUNT_FOR_TABLET);
+    }
+    if (screen === "full") {
       setRenderedMovies(INITIAL_MOVIES_COUNT);
       setAddMovies(ADD_MOVIES_COUNT);
     }
-  }, [screen]);
+  }, [screen, query]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -124,7 +129,9 @@ function App() {
   }
 
   function handleShowMoreMovies() {
-    setRenderedMovies(renderedMovies + addMovies);
+    console.log("handleShowMoreMovies before", renderedMovies);
+    setRenderedMovies((prev) => prev + addMovies);
+    console.log("handleShowMoreMovies after", renderedMovies);
   }
 
   function handleRegister({ name, email, password }) {
@@ -191,11 +198,18 @@ function App() {
   }
 
   async function handleSearch(searchWord) {
-    if (!query && !searchWord) return;
+    if (!query && !searchWord) {
+      return;
+    }
+    if (searchWord.length === 0) {
+      setMessage("Нужно ввести ключевое слово");
+      return;
+    }
     if (location.pathname === "/movies") {
       localStorage.setItem("query", searchWord);
     }
     setQuery(searchWord);
+
     if (!localStorage.initialMovies) {
       setIsLoading(true);
       try {
@@ -207,6 +221,7 @@ function App() {
         setIsLoading(false);
       }
     }
+
     if (!localStorage.savedMovies) {
       try {
         const userSavedMovies = await getUserMovies();
@@ -214,6 +229,13 @@ function App() {
       } catch (error) {
         console.log(error);
       }
+    }
+    if (screen === "mobile") {
+      setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_MOBILE);
+    } else if (screen === "tablet") {
+      setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_TABLET);
+    } else {
+      setRenderedMovies(INITIAL_MOVIES_COUNT);
     }
 
     const moviesToMap = mapToArray(
@@ -223,17 +245,23 @@ function App() {
           movie.nameRU.toLowerCase().includes(searchWord.toLowerCase())
       )
     );
-
-    if (screen === "mobile") {
-      setRenderedMovies(INITIAL_MOVIES_COUNT_FOR_MOBILE);
-    } else if (screen === "tablet") {
-      setRenderedMovies(INITIAL_MOVIES_COUNT);
-    } else {
-      setRenderedMovies(INITIAL_MOVIES_COUNT);
-    }
-
     setMovies(moviesToMap);
     setDidUserSearch(true);
+  }
+
+  async function handleSearchWithinSaved(searchWord) {
+    try {
+      const userSavedMovies = await getUserMovies();
+      localStorage.setItem("savedMovies", JSON.stringify(userSavedMovies));
+    } catch (error) {
+      console.log(error);
+    }
+    const foundMoviesWithinSaved = JSON.parse(localStorage.savedMovies).filter(
+      (movie) =>
+        movie.nameEN.toLowerCase().includes(searchWord.toLowerCase()) ||
+        movie.nameRU.toLowerCase().includes(searchWord.toLowerCase())
+    );
+    setSavedMovies(foundMoviesWithinSaved);
   }
 
   function handleAddToUserList(card) {
@@ -261,15 +289,6 @@ function App() {
         localStorage.setItem("savedMovies", JSON.stringify(updateSavedMovies));
       })
       .catch((err) => console.log(err));
-  }
-
-  function handleSearchWithinSaved(searchWord) {
-    const foundMoviesWithinSaved = savedMovies.filter(
-      (movie) =>
-        movie.nameEN.toLowerCase().includes(searchWord.toLowerCase()) ||
-        movie.nameRU.toLowerCase().includes(searchWord.toLowerCase())
-    );
-    setSavedMovies(foundMoviesWithinSaved);
   }
 
   return (
@@ -328,6 +347,7 @@ function App() {
                   didUserSearch={didUserSeach}
                   savedMovies={savedMovies}
                   loading={isLoading}
+                  message={message}
                 />
               }
             />
@@ -345,6 +365,7 @@ function App() {
                   savedMovies={savedMovies}
                   loading={isLoading}
                   isChecked={isShortSavedMoves}
+                  message={message}
                 />
               }
             />

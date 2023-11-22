@@ -35,6 +35,11 @@
     text-decoration: none;
 }
 
+.header__navigation-button_active {
+    color: #808080;
+    text-decoration: none;
+}
+
 .header__navigation-button:hover {
     color: #808080;
     cursor: pointer;

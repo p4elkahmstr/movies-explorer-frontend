@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
+import { SHORT_MOVIE_DURATION } from "../../utils/constants";
 
 const MoviesCardList = ({
   didUserSearch,
@@ -16,7 +17,7 @@ const MoviesCardList = ({
   const location = useLocation();
 
   const movies = isChecked
-    ? cards.filter((el) => el.duration < 41)
+    ? cards.filter((el) => el.duration < SHORT_MOVIE_DURATION)
     : [...cards];
   if (didUserSearch && cards.length === 0) {
     return <p className="card-list__message">Ничего не найдено</p>;

@@ -4,7 +4,7 @@ import saved from "../../images/saved.svg";
 import exit from "../../images/exit.svg";
 import { useLocation } from "react-router-dom";
 
-const MoviesCard = ({ onAddToUserList, card, onDelete, savedMovies }) => {
+const MoviesCard = ({ onAddToUserList, card, onDelete }) => {
   const localSavedMovies = JSON.parse(localStorage.savedMovies);
 
   const location = useLocation();
